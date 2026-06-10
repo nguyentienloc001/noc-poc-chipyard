@@ -1,0 +1,46 @@
+# 04 — Spec: Ma trận thí nghiệm & quy trình
+
+## 1. Ma trận chính (Verilator — toàn bộ)
+
+| # | Config | B1 | B2 | B3 | B4 | B5 | B6 |
+|---|---|---|---|---|---|---|---|
+| E1 | Baseline2CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | — |
+| E2 | Baseline4CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | — |
+| E3 | Baseline8CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | — |
+| E4 | NoCMesh2x2_4CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ |
+| E5 | NoCMesh3x3_8CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ |
+| E6 | NoCRing8CoreConfig (phụ) | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ |
+
+Cặp so sánh chính: **E2↔E4** (4 core) và **E3↔E5** (8 core).
+
+## 2. Ma trận FPGA VC707 (tập con xác nhận)
+
+| # | Config | Synthesis (LUT/FF/BRAM/Fmax) | B1 | B3 | B4 |
+|---|---|---|---|---|---|
+| F1 | Baseline4CoreConfig | ☐ | ☐ | ☐ | ☐ |
+| F2 | NoCMesh2x2_4CoreConfig | ☐ | ☐ | ☐ | ☐ |
+| F3 | Baseline8CoreConfig (nếu fit) | ☐ | ☐ | ☐ | ☐ |
+| F4 | NoCMesh3x3_8CoreConfig (nếu fit) | ☐ | ☐ | ☐ | ☐ |
+
+Synthesis report là deliverable bắt buộc kể cả khi board không chạy được (trả lời RQ2).
+
+## 3. Quy trình một thí nghiệm (chuẩn hóa)
+
+1. Checkout đúng commit Chipyard đã pin; ghi `git rev-parse HEAD`.
+2. Build sim: `src/scripts/run_sim.sh <Config> --build-only`; lưu log build.
+3. Build benchmark: `make -C src/benchmarks CONFIG_CORES=<N> MARCH=<march>`.
+4. Chạy ≥3 lần: `src/scripts/run_sim.sh <Config> <bench.riscv>`; mỗi lần xuất raw log vào `results/raw/`.
+5. Parse: `src/scripts/parse_results.py results/raw/<dir>` → append `results/csv/results.csv`.
+6. Tick ô tương ứng ở ma trận trên + ghi ngày, commit hash vào mục 5.
+
+## 4. Phân tích (P4)
+
+- Biểu đồ chính: (a) aggregate BW vs N core, 2 đường crossbar/NoC — break-even là giao điểm; (b) loaded latency vs background load; (c) bảng tài nguyên & Fmax; (d) scatter Verilator vs FPGA cùng benchmark (RQ3).
+- Thống kê: median ± min/max của ≥3 runs; không dùng mean nếu có outlier.
+- Mọi biểu đồ sinh bằng script (matplotlib) từ `results.csv` — reproducible.
+
+## 5. Nhật ký thí nghiệm
+
+| Ngày | Thí nghiệm | Commit chipyard | Ghi chú |
+|---|---|---|---|
+| — | — | — | — |

@@ -1,0 +1,17 @@
+services:
+  chipyard:
+    # Image build bằng build.sh (root of trust) hoặc pull từ Docker Hub.
+    # Override: DOCKER_IMAGE=<user>/noc-poc-chipyard DOCKER_TAG=<tag> docker compose run --rm chipyard
+    image: ${DOCKER_IMAGE:-local/noc-poc-chipyard}:${DOCKER_TAG:-latest}
+    # Không pin platform — image multi-arch, chạy native trên cả M1 (arm64) và x86 (amd64)
+    volumes:
+      - ../..:/project           # repo root (compose file nằm ở src/docker/)
+      - chipyard-vol:/work       # chipyard source + build output (persist)
+    working_dir: /work
+    environment:
+      - MAKEFLAGS=-j8            # chỉnh theo số core máy
+    stdin_open: true
+    tty: true
+
+volumes:
+  chipyard-vol:
