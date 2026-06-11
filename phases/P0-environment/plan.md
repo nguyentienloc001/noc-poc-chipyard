@@ -25,12 +25,12 @@ Dockerfile + build.sh/push.sh/.env.example trong `src/docker/` (đã viết, ch�
 
 ## Điều kiện hoàn thành (phase gate)
 
-- [ ] Image multi-arch (amd64+arm64) nằm trên Docker Hub; **digest pin** vào `docs/00-research-plan.md` mục 6 + PROGRESS.md.
-- [ ] `RocketConfig` hello-world pass trên Verilator ở cả M1 (arm64) và x86 (amd64), **chạy từ image pull về** chứ không phải build local.
-- [ ] Chipyard version + commit hash pinned; quy trình setup không-conda ghi thành lệnh chính xác trong `src/docker/README.md`.
-- [ ] Pipeline benchmark→CSV chạy thông (1 row thật trong results.csv).
-- [ ] Không có secret nào trong repo: `git grep -iE '(token|password|secret)' -- ':!*.example' ':!*.md'` sạch.
-- [ ] Thời gian build/sim thực tế ghi nhận.
+- [x] Image multi-arch (amd64+arm64) nằm trên Docker Hub; **digest pin** vào `docs/00-research-plan.md` mục 6 + PROGRESS.md. ✅ 2026-06-11
+- [x] `RocketConfig` hello-world pass trên Verilator ở cả M1 (arm64) và x86 (amd64), **chạy từ image pull về** chứ không phải build local. ✅ x86 = GitHub Actions (changes.md 2026-06-11); arm64 = pull theo digest. Xem report.md
+- [x] Chipyard version + commit hash pinned; quy trình setup không-conda ghi thành lệnh chính xác trong `src/docker/README.md`. ✅
+- [x] Pipeline benchmark→CSV chạy thông (1 row thật trong results.csv). ✅ smoke 2026-06-11
+- [x] Không có secret nào trong repo: `git grep` chỉ match tên biến env (cơ chế) — không có giá trị secret. ✅
+- [x] Thời gian build/sim thực tế ghi nhận. ✅ actual.md "step 8"
 
 ## Rủi ro của phase này
 

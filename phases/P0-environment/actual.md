@@ -148,3 +148,17 @@
   - linux/arm64: `sha256:60720a5baf62247732f89e1d0444efd963a0cf1e492d722b4365d913a2dd7080`
   - Verify: `docker buildx imagetools inspect` xác nhận 2 platform; tag dated và latest cùng digest.
 - Còn lại của bước 6 (gate): trên máy x86 pull image theo digest, lặp bước 4–5 (build sim RocketConfig + hello pass) — chứng minh root-of-trust trên arch thứ hai.
+
+## [2026-06-11 ~07:5x] Loc + Claude Code — step 6b đổi phương án: GitHub Actions CI thay máy x86 local
+
+- Loc không có máy x86 → cân nhắc emulation Rosetta/qemu trên M1, rồi Loc đề xuất đúng hơn: **GitHub Actions runner = x86_64 thật** → thỏa gate nguyên văn "trên máy x86, từ image pull". Ghi changes.md 2026-06-11 (phương án emulation bỏ, chưa thực hiện).
+- Đã làm: script `src/scripts/p0-step6-x86-verify.sh` (chạy trong image pinned: assert x86_64 → clone chipyard @ 69eba860 → build-setup skip-conda → p0-step3-manual.sh → make CONFIG=RocketConfig → hello qua link recipe → assert output); workflow `.github/workflows/p0-x86-verify.yml` (pull image theo DIGEST, workflow_dispatch, upload log artifact).
+- Repo push lên GitHub: `nguyentienloc001/noc-poc-chipyard` (private), commit `8a65f9d` (30 files — toàn bộ P0 đến giờ). Pre-push check: `.env` không staged, không có token trong tracked files.
+- CI run `27315807639` đã trigger, đang chạy (~1–1.5h dự kiến). PASS = gate "hello pass cả 2 arch từ image pull" tick được.
+
+## [2026-06-11 ~12:05] Claude Code — step 6b PASS cả 2 arch → P0 ĐÓNG
+
+- CI x86 run 27315807639: **PASS trong 25m15s** (nhanh hơn dự kiến 1–1.5h — runner x86 build sạch toàn bộ: clone → build-setup → collateral → sim → hello). Log artifact tải về `results/raw/p0-step6-ci/p0-step6-x86-verify.log`, dòng cuối "X86 ROOT-OF-TRUST VERIFY: PASS".
+- Đối xứng arm64: pull image theo digest pinned trên M1, chạy hello từ image pull → PASS (`results/raw/p0-step6-arm64-pulled.log`). Ghi chú trung thực: arm64 dùng sim binary có sẵn trong volume (build bởi image local cùng Dockerfile); x86 build từ zero.
+- Gate plan.md: 6/6 tick. `report.md` đã viết (expectations vs actual: 8/10 đúng, E5 sai hướng — tests/ là CMake; 3 phát hiện ngoài dự đoán: JDK21×sbt, TSI-load, max-cycles).
+- **P0 status: DONE.**

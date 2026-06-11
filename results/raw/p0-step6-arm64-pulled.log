@@ -1,0 +1,6 @@
+=== [2026-06-11T12:05:27+07:00] arm64 hello từ image PULL theo digest (đối xứng CI x86) ===
+aarch64
+Hello HTIF from libgloss+picolibc
+[UART] UART0 is here (stdin/stdout).
+- /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.RocketConfig/gen-collateral/TestDriver.v:158: Verilog $finish
+exit=0
