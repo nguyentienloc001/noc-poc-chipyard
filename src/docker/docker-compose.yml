@@ -14,6 +14,11 @@ services:
       - RISCV=/work/riscv        # install prefix cho spike/pk/tests (flow không-conda, P0 E9)
       # /work/riscv/bin lên đầu PATH: spike/elf2hex/espresso install vào volume (P0 step 3)
       - PATH=/work/riscv/bin:/opt/sbt/bin:/opt/firtool/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      # Provenance passthrough cho run_sim.sh meta.txt (docs/04 §3) — data chính
+      # thức phải set DOCKER_IMAGE/DOCKER_TAG theo pin + IMAGE_DIGEST
+      - DOCKER_IMAGE=${DOCKER_IMAGE:-local/noc-poc-chipyard}
+      - DOCKER_TAG=${DOCKER_TAG:-latest}
+      - IMAGE_DIGEST=${IMAGE_DIGEST:-}
     stdin_open: true
     tty: true
 

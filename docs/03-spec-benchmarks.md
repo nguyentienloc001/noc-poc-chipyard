@@ -2,8 +2,8 @@
 
 ## 1. Nguyên tắc đo
 
-- **Bare-metal** (không OS) để loại nhiễu: link bằng crt0 + linker script trong `src/benchmarks/common/`.
-- Đếm cycle bằng CSR `rdcycle` (và `rdinstret` để sanity-check), wrap trong `src/benchmarks/common/perf.h`.
+- **Bare-metal** (không OS) để loại nhiễu: crt0 + linker script + HTIF syscalls lấy từ **libgloss-htif** (chipyard submodule, đã patch + install vào `$RISCV` ở P0); headers đo nằm trong `src/benchmarks/common/`. Build standalone bằng `src/benchmarks/Makefile` theo link recipe pin ở `phases/P0-environment/report.md` — KHÔNG dùng `chipyard/tests/` (1.13 là CMake + htif_nano.specs, không hợp toolchain picolibc của image).
+- Đếm cycle bằng CSR `rdcycle` (và `rdinstret` để sanity-check), wrap trong `src/benchmarks/common/perf.h`. printf đi qua `htif_wrap.specs` (`--wrap=printf/puts/...` → HTIF console trực tiếp).
 - Mỗi benchmark: warm-up 1 lần (nạp cache/predictor) rồi đo; in kết quả qua UART/HTIF dạng `CSV:<bench>,<n_active_cores>,<param>,<cycles>,<instret>` (macro `REPORT` trong `perf.h`; config/platform lấy từ `meta.txt` do `run_sim.sh` ghi).
 - Multi-core: core 0 điều phối qua biến shared + barrier (atomic AMO); các core còn lại spin chờ.
 - Cùng một binary chạy trên cả Verilator và FPGA (chỉ khác tần số — kết quả báo theo **cycle**, không theo giây).

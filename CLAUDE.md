@@ -22,7 +22,7 @@ Project PoC luận văn thạc sĩ: chứng minh thực nghiệm NoC (Constellat
 
 - Chipyard version: pin tại `docs/00-research-plan.md` (mục Môi trường). Không tự ý nâng version.
 - Scala configs đặt trong `src/chipyard-configs/NoCResearchConfigs.scala`, naming: `Baseline<N>CoreConfig`, `NoCMesh<RxC><N>CoreConfig`, `NoCRing<N>CoreConfig`.
-- Benchmark: C/C++ **bare-metal**, đo bằng `rdcycle`/`rdinstret` (CSR), build bằng `riscv64-unknown-elf-gcc` với `-O2`, link theo `src/benchmarks/common/`.
+- Benchmark: C/C++ **bare-metal**, đo bằng `rdcycle`/`rdinstret` (CSR), build bằng `riscv64-unknown-elf-gcc -O2`; headers đo trong `src/benchmarks/common/`, link bằng libgloss-htif specs (recipe pin ở `phases/P0-environment/report.md`).
 - Kết quả: CSV theo schema trong `docs/04-spec-experiments.md`, raw log giữ nguyên trong `results/raw/<date>-<config>-<bench>/`.
 - Script shell: bash, `set -euo pipefail`.
 
@@ -95,9 +95,10 @@ src/scripts/run_sim.sh Baseline4CoreConfig out/zeroload.riscv     # build (nếu
 N_RUNS=5 src/scripts/run_sim.sh NoCMesh2x2_4CoreConfig bench.riscv my-tag
 ```
 
-**Build benchmark** (`src/benchmarks/`, reuse infra `chipyard/tests/`):
+**Build benchmark** (`src/benchmarks/`, standalone — KHÔNG dùng `chipyard/tests/`, xem `src/benchmarks/README.md`):
 ```bash
-make -C src/benchmarks install CONFIG_CORES=4 MARCH=rv64gc   # copy sources vào tests/, in lệnh build tiếp theo
+make -C src/benchmarks all NCORES=4              # → build/*.riscv (link recipe libgloss-htif pin ở P0 report)
+make -C src/benchmarks all DEFS='-DN_LOADS=20000'  # smoke params
 ```
 
 **Parse log → CSV:** `src/scripts/parse_results.py <results/raw/dir>` — quét dòng `CSV:<bench>,<ncores>,<param>,<cycles>,<instret>` trong `run*.log`, append vào `results/csv/results.csv`, tự flag variance >5% (rule 4).
@@ -111,7 +112,7 @@ Data flow một data point:
 src/chipyard-configs/*.scala   (copy vào chipyard/generators/chipyard/.../config/)
         │  elaborate (sbt + firtool)
         ▼
-verilator simulator của <Config>     ◄── benchmark .riscv (src/benchmarks, build qua chipyard/tests)
+verilator simulator của <Config>     ◄── benchmark .riscv (src/benchmarks, build standalone — libgloss-htif recipe)
         │  run_sim.sh, N_RUNS=3, ghi meta.txt
         ▼
 results/raw/<tag>-<config>-<bench>/run*.log   (in dòng "CSV:..." qua rdcycle/rdinstret)

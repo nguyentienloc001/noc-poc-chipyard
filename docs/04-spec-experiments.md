@@ -28,10 +28,14 @@ Synthesis report là deliverable bắt buộc kể cả khi board không chạy 
 
 1. Checkout đúng commit Chipyard đã pin; ghi `git rev-parse HEAD`.
 2. Build sim: `src/scripts/run_sim.sh <Config> --build-only`; lưu log build.
-3. Build benchmark: `make -C src/benchmarks CONFIG_CORES=<N> MARCH=<march>`.
-4. Chạy ≥3 lần: `src/scripts/run_sim.sh <Config> <bench.riscv>`; mỗi lần xuất raw log vào `results/raw/`.
-5. Parse: `src/scripts/parse_results.py results/raw/<dir>` → append `results/csv/results.csv`.
+3. Build benchmark (standalone, xem `src/benchmarks/README.md`): `make -C src/benchmarks all NCORES=<N> MARCH=<march> MABI=<mabi>`.
+4. Chạy ≥3 lần: `src/scripts/run_sim.sh <Config> <bench.riscv>` (script default `N_RUNS=3`, `LOADMEM=1`, `TIMEOUT_CYCLES=200M`; ghi `meta.txt` provenance: config, chipyard commit, project commit, binary sha256, image, n_runs, loadmem, timeout). Data chính thức: chạy từ image đã pin và export `IMAGE_DIGEST` để vào meta.
+5. Parse: `src/scripts/parse_results.py results/raw/<dir>` → append `results/csv/results.csv` (idempotent — re-parse cùng dir không tạo duplicate) + regenerate `results/csv/summary.csv` (median/min/max/spread theo nhóm; nhóm <3 runs bị flag `smoke` — không dùng làm data point chính thức).
 6. Tick ô tương ứng ở ma trận trên + ghi ngày, commit hash vào mục 5.
+
+Schema `results/csv/summary.csv` (sinh tự động từ results.csv, không sửa tay):
+`platform,config,benchmark,n_active_cores,param,n_runs,median_cycles,min_cycles,max_cycles,spread_pct,median_derived,flag`
+(`flag` = `smoke` nếu n_runs<3, `HIGH-VARIANCE` nếu spread>5% — cả hai đều phải điều tra/ghi chú trước khi dùng).
 
 ## 4. Phân tích (P4)
 

@@ -1,0 +1,2 @@
+platform,config,benchmark,n_active_cores,param,n_runs,median_cycles,min_cycles,max_cycles,spread_pct,median_derived,flag
+verilator,RocketConfig,zeroload_latency,1,20000,1,1052315,1052315,1052315,0.00,52.6157,smoke
