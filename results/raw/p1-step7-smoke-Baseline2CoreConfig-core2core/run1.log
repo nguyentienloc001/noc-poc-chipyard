@@ -1,0 +1,15 @@
+Running with RISCV=/work/riscv
+if [ "/project/src/benchmarks/build/core2core.riscv" != "none" ] && [ ! -f "/project/src/benchmarks/build/core2core.riscv" ]; then printf "\n\nBinary /project/src/benchmarks/build/core2core.riscv not found\n\n"; exit 1; fi
+(set -o pipefail &&  /work/chipyard/sims/verilator/simulator-chipyard.harness-Baseline2CoreConfig \
+	+permissive \
+	+dramsim +dramsim_ini_dir=/work/chipyard/generators/testchipip/src/main/resources/dramsim2_ini +max-cycles=200000000   +loadmem=/project/src/benchmarks/build/core2core.riscv  \
+	+verbose \
+	+permissive-off \
+	/project/src/benchmarks/build/core2core.riscv \
+	 \
+	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/core2core.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/core2core.log)
+[UART] UART0 is here (stdin/stdout).
+c2c:0,1,21234
+c2c:1,0,21206
+CSV:core2core,2,200,21234,0
+- /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.Baseline2CoreConfig/gen-collateral/TestDriver.v:158: Verilog $finish

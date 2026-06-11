@@ -1,0 +1,12 @@
+date: 2026-06-11T22:15:37+07:00
+platform: verilator
+config: Baseline2CoreConfig
+binary: /project/src/benchmarks/build/zeroload_latency.riscv
+binary_sha256: 49babab5bafad3e78f9b069b953d1014e91c13ad318689369fae548ef6cb971d
+chipyard_commit: 69eba860a352343e4ac6b6df0f3638a79a86ec78
+project_commit: 38df866d0690d4820ff2f255422ea4bec066410e-dirty
+image: local/noc-poc-chipyard:latest
+image_digest: UNSET-not-official
+n_runs: 1
+loadmem: 1
+timeout_cycles: 200000000

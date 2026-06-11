@@ -47,4 +47,5 @@ Schema `results/csv/summary.csv` (sinh tự động từ results.csv, không s�
 
 | Ngày | Thí nghiệm | Commit chipyard | Ghi chú |
 |---|---|---|---|
+| 2026-06-11 | Pipeline smoke (P1 bước 7): B1–B5 trên Baseline2CoreConfig, param GIẢM, 1 run/bench | 69eba860 | KHÔNG phải data point chính thức (flag smoke trong summary.csv). 5/5 PASS: multi-hart verified trên RTL (B3 percore đủ 2 hart), B4 đo được +17.6% latency dưới tải, B5 106 c/RT. Log: `p1-step7-smoke-*` |
 | 2026-06-11 | Pipeline smoke (P0 bước 7): B1 zeroload_latency trên RocketConfig, param GIẢM (-DFOOTPRINT=2MB -DN_LOADS=20000), 1 run | 69eba860 | KHÔNG phải data point chính thức (config/param ngoài ma trận). Pipeline benchmark→sim→CSV verified; 52.6 cycles/load; row trong results.csv giữ làm bằng chứng smoke. LƯU Ý P1: chạy benchmark lớn cần LOADMEM=1 + TIMEOUT_CYCLES (đã default trong run_sim.sh); sửa idx[] 128KB stack trong zeroload trước khi đo thật |

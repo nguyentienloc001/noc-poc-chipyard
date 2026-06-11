@@ -35,3 +35,22 @@
   - **Bug đo bị bắt nhờ smoke**: gcc -O2 elide pass idempotent lặp lại (copy chạy 1/2 ITERS: 22536 vs scale 114700 cùng access count) → bytes/cycle sẽ bị thổi phồng. Fix compiler barrier `asm volatile("" ::: "memory")` giữa iterations (B2 KERNEL + B3); verify: copy 22536 → 45068 (~2×) ✓. Ghi vào docs/03 §1 thành quy tắc.
   - Lưu ý đã ghi README: số spike là functional-only (B5 ra đúng 1,000,000 = artifact interleaving quantum spike; B4 cycles y hệt B1 vì spike không model contention). Số thật chờ Verilator.
 - Trạng thái plan: bước 3 ✅ (Makefile + build log nằm trong spike-smoke log), bước 4 ✅, bước 5 ✅ phần cơ chế (libgloss contract + SECONDARY_ENTRY, docs/03 đã ghi; xác nhận cuối trên Verilator gộp vào bước 7). Kế: bước 6 — copy NoCResearchConfigs.scala vào chipyard, build Baseline2/4/8.
+
+## [2026-06-11 ~22:15] Claude Code — P1 bước 6 lần 1: 9 lỗi compile → fix API theo example trong cây
+
+- `make CONFIG=Baseline2CoreConfig` FAIL 9 lỗi compile (log `p1-step6-baseline2-build.log` bản cũ): (1) `WithNBigCores/WithNSmallCores` không còn ở `freechips.rocketchip.subsystem` — chipyard 1.13 chuyển sang `freechips.rocketchip.rocket` (rocket/Configs.scala:61,131); (2) `TLNoCParams` là trait, class đúng là `constellation.protocol.SimpleTLNoCParams`; import `constellation.protocol.TLNoCParams` sai.
+- Đối chiếu example chuẩn trong cây (`NoCConfigs.scala` — MultiNoCConfig): idiom 1.13 là `SimpleTLNoCParams(DiplomaticNetworkNodeMapping(...), NoCParams(topology = TerminalRouter(<topo>), routingRelation = ...(TerminalRouterRouting(<routing>), ...)))`; mesh dùng `Mesh2DEscapeRouting`, ring (BidirectionalTorus1D) dùng `BidirectionalTorus1DShortestRouting` + 10 VC + depth 2.
+- `NoCResearchConfigs.scala` viết lại theo idiom đó (baselines + 3 NoC configs typecheck-được; thêm `serial_tl` vào inNodeMapping — example cho thấy fbus serial_tl cũng đi qua sbus NoC). Node mappings vẫn PROVISIONAL — finalize P2 theo tên TileLink edge thật khi elaborate.
+- Retry build Baseline2CoreConfig đang chạy.
+
+## [2026-06-11 ~22:40] Claude Code — bước 6 (Baseline2) PASS + bước 7 smoke 5/5 PASS: multi-hart VERIFIED trên RTL
+
+- Bước 6 retry (API fix): `Baseline2CoreConfig` build PASS 1m39s, 0 lỗi — cả 3 NoC config typecheck OK (log `p1-step6-baseline2-build.log`). Baseline4/8 đang build (log `p1-step6-baseline48-build.log`).
+- **Bước 7 smoke 5/5 PASS** trên Baseline2CoreConfig Verilator (params giảm: BUF_WORDS=8192, FOOTPRINT=256KB, N_LOADS=5000, N_RT=200, ITERS=2; N_RUNS=1; log driver `p1-step7-smoke-driver.log`, raw từng bench `p1-step7-smoke-Baseline2CoreConfig-*/`):
+  - B1: 19.17 cycles/load (smoke 256KB < L2 → chủ yếu L2 hit, hợp lý); instret 15005 KHỚP spike → deterministic, đo đúng đoạn code.
+  - B2: triad 1.16 bytes/cycle; instret khớp spike.
+  - B3: aggregate 2.66 B/c trên 2 core; percore 196784/191640 (lệch 2.7%) → **cả 2 hart thật sự chạy song song trên RTL** — E7 ĐÓNG hoàn toàn (spike + Verilator).
+  - B4: 22.58 c/load có tải nền vs 19.17 không tải = **+17.6%** → benchmark đo được contention thật trên crossbar (đúng thiết kế thí nghiệm).
+  - B5: 106.2 cycles/round-trip, 2 chiều đối xứng (21234/21206, 0.13%) — artifact interleaving của spike biến mất như dự đoán.
+- Parse OK: 5 rows mới vào results.csv (tổng 6), summary.csv flag `smoke` toàn bộ — đúng thiết kế (không phải data chính thức: 1 run, params giảm).
+- Phase gates tick được đến giờ: benchmark standalone ✅, B1–B5 compile + smoke pass trên Baseline2CoreConfig ✅. Còn: Baseline4/8 build (đang chạy), đo chính thức (bước 8), report.

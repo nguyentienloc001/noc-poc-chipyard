@@ -1,0 +1,108 @@
+=== [2026-06-11T22:15:37+07:00] P1 step 7: smoke B1-B5 on Baseline2CoreConfig (reduced params, N_RUNS=1) ===
+BUILD OK
+
+########## zeroload_latency ##########
+WARNING: IMAGE_DIGEST unset — run is NOT a valid official data point (docs/04 §3)
+>> Run 1/1
+Running with RISCV=/work/riscv
+mkdir -p /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig
+if [ "/project/src/benchmarks/build/zeroload_latency.riscv" != "none" ] && [ ! -f "/project/src/benchmarks/build/zeroload_latency.riscv" ]; then printf "\n\nBinary /project/src/benchmarks/build/zeroload_latency.riscv not found\n\n"; exit 1; fi
+(set -o pipefail &&  /work/chipyard/sims/verilator/simulator-chipyard.harness-Baseline2CoreConfig \
+	+permissive \
+	+dramsim +dramsim_ini_dir=/work/chipyard/generators/testchipip/src/main/resources/dramsim2_ini +max-cycles=200000000   +loadmem=/project/src/benchmarks/build/zeroload_latency.riscv  \
+	+verbose \
+	+permissive-off \
+	/project/src/benchmarks/build/zeroload_latency.riscv \
+	 \
+	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/zeroload_latency.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/zeroload_latency.log)
+[UART] UART0 is here (stdin/stdout).
+CSV:zeroload_latency,1,5000,95862,15005
+sink:0x80023640
+- /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.Baseline2CoreConfig/gen-collateral/TestDriver.v:158: Verilog $finish
+Logs: /project/results/raw/p1-step7-smoke-Baseline2CoreConfig-zeroload_latency
+Next: src/scripts/parse_results.py /project/results/raw/p1-step7-smoke-Baseline2CoreConfig-zeroload_latency
+
+########## stream_bw ##########
+WARNING: IMAGE_DIGEST unset — run is NOT a valid official data point (docs/04 §3)
+>> Run 1/1
+Running with RISCV=/work/riscv
+if [ "/project/src/benchmarks/build/stream_bw.riscv" != "none" ] && [ ! -f "/project/src/benchmarks/build/stream_bw.riscv" ]; then printf "\n\nBinary /project/src/benchmarks/build/stream_bw.riscv not found\n\n"; exit 1; fi
+(set -o pipefail &&  /work/chipyard/sims/verilator/simulator-chipyard.harness-Baseline2CoreConfig \
+	+permissive \
+	+dramsim +dramsim_ini_dir=/work/chipyard/generators/testchipip/src/main/resources/dramsim2_ini +max-cycles=200000000   +loadmem=/project/src/benchmarks/build/stream_bw.riscv  \
+	+verbose \
+	+permissive-off \
+	/project/src/benchmarks/build/stream_bw.riscv \
+	 \
+	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/stream_bw.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/stream_bw.log)
+[UART] UART0 is here (stdin/stdout).
+info:stream_copy,262144,164998
+info:stream_scale,262144,239385
+info:stream_add,393216,306139
+CSV:stream_bw,1,393216,338751,163853
+sink:33
+- /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.Baseline2CoreConfig/gen-collateral/TestDriver.v:158: Verilog $finish
+Logs: /project/results/raw/p1-step7-smoke-Baseline2CoreConfig-stream_bw
+Next: src/scripts/parse_results.py /project/results/raw/p1-step7-smoke-Baseline2CoreConfig-stream_bw
+
+########## contention_bw ##########
+WARNING: IMAGE_DIGEST unset — run is NOT a valid official data point (docs/04 §3)
+>> Run 1/1
+Running with RISCV=/work/riscv
+if [ "/project/src/benchmarks/build/contention_bw.riscv" != "none" ] && [ ! -f "/project/src/benchmarks/build/contention_bw.riscv" ]; then printf "\n\nBinary /project/src/benchmarks/build/contention_bw.riscv not found\n\n"; exit 1; fi
+(set -o pipefail &&  /work/chipyard/sims/verilator/simulator-chipyard.harness-Baseline2CoreConfig \
+	+permissive \
+	+dramsim +dramsim_ini_dir=/work/chipyard/generators/testchipip/src/main/resources/dramsim2_ini +max-cycles=200000000   +loadmem=/project/src/benchmarks/build/contention_bw.riscv  \
+	+verbose \
+	+permissive-off \
+	/project/src/benchmarks/build/contention_bw.riscv \
+	 \
+	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/contention_bw.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/contention_bw.log)
+[UART] UART0 is here (stdin/stdout).
+CSV:contention_bw,2,524288,196784,77897
+percore:0,196784
+percore:1,191640
+- /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.Baseline2CoreConfig/gen-collateral/TestDriver.v:158: Verilog $finish
+Logs: /project/results/raw/p1-step7-smoke-Baseline2CoreConfig-contention_bw
+Next: src/scripts/parse_results.py /project/results/raw/p1-step7-smoke-Baseline2CoreConfig-contention_bw
+
+########## loaded_latency ##########
+WARNING: IMAGE_DIGEST unset — run is NOT a valid official data point (docs/04 §3)
+>> Run 1/1
+Running with RISCV=/work/riscv
+if [ "/project/src/benchmarks/build/loaded_latency.riscv" != "none" ] && [ ! -f "/project/src/benchmarks/build/loaded_latency.riscv" ]; then printf "\n\nBinary /project/src/benchmarks/build/loaded_latency.riscv not found\n\n"; exit 1; fi
+(set -o pipefail &&  /work/chipyard/sims/verilator/simulator-chipyard.harness-Baseline2CoreConfig \
+	+permissive \
+	+dramsim +dramsim_ini_dir=/work/chipyard/generators/testchipip/src/main/resources/dramsim2_ini +max-cycles=200000000   +loadmem=/project/src/benchmarks/build/loaded_latency.riscv  \
+	+verbose \
+	+permissive-off \
+	/project/src/benchmarks/build/loaded_latency.riscv \
+	 \
+	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/loaded_latency.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/loaded_latency.log)
+[UART] UART0 is here (stdin/stdout).
+CSV:loaded_latency,2,5000,112919,15005
+sink:0x800637c0
+- /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.Baseline2CoreConfig/gen-collateral/TestDriver.v:158: Verilog $finish
+Logs: /project/results/raw/p1-step7-smoke-Baseline2CoreConfig-loaded_latency
+Next: src/scripts/parse_results.py /project/results/raw/p1-step7-smoke-Baseline2CoreConfig-loaded_latency
+
+########## core2core ##########
+WARNING: IMAGE_DIGEST unset — run is NOT a valid official data point (docs/04 §3)
+>> Run 1/1
+Running with RISCV=/work/riscv
+if [ "/project/src/benchmarks/build/core2core.riscv" != "none" ] && [ ! -f "/project/src/benchmarks/build/core2core.riscv" ]; then printf "\n\nBinary /project/src/benchmarks/build/core2core.riscv not found\n\n"; exit 1; fi
+(set -o pipefail &&  /work/chipyard/sims/verilator/simulator-chipyard.harness-Baseline2CoreConfig \
+	+permissive \
+	+dramsim +dramsim_ini_dir=/work/chipyard/generators/testchipip/src/main/resources/dramsim2_ini +max-cycles=200000000   +loadmem=/project/src/benchmarks/build/core2core.riscv  \
+	+verbose \
+	+permissive-off \
+	/project/src/benchmarks/build/core2core.riscv \
+	 \
+	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/core2core.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/core2core.log)
+[UART] UART0 is here (stdin/stdout).
+c2c:0,1,21234
+c2c:1,0,21206
+CSV:core2core,2,200,21234,0
+- /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.Baseline2CoreConfig/gen-collateral/TestDriver.v:158: Verilog $finish
+Logs: /project/results/raw/p1-step7-smoke-Baseline2CoreConfig-core2core
+Next: src/scripts/parse_results.py /project/results/raw/p1-step7-smoke-Baseline2CoreConfig-core2core

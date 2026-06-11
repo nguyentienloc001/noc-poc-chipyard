@@ -1,0 +1,12 @@
+date: 2026-06-11T22:20:11+07:00
+platform: verilator
+config: Baseline2CoreConfig
+binary: /project/src/benchmarks/build/loaded_latency.riscv
+binary_sha256: cc0e40de46a7f08280e914eaf795bbc220ca7364fe9f32cdd80dd92dac3e0277
+chipyard_commit: 69eba860a352343e4ac6b6df0f3638a79a86ec78
+project_commit: 38df866d0690d4820ff2f255422ea4bec066410e-dirty
+image: local/noc-poc-chipyard:latest
+image_digest: UNSET-not-official
+n_runs: 1
+loadmem: 1
+timeout_cycles: 200000000

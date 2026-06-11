@@ -1,2 +1,7 @@
 date,platform,config,benchmark,n_active_cores,param,run_idx,cycles,instret,derived_metric
 2026-06-11,verilator,RocketConfig,zeroload_latency,1,20000,1,1052315,60005,52.6157
+2026-06-11,verilator,Baseline2CoreConfig,contention_bw,2,524288,1,196784,77897,2.66428
+2026-06-11,verilator,Baseline2CoreConfig,core2core,2,200,1,21234,0,106.17
+2026-06-11,verilator,Baseline2CoreConfig,loaded_latency,2,5000,1,112919,15005,22.5838
+2026-06-11,verilator,Baseline2CoreConfig,stream_bw,1,393216,1,338751,163853,1.16078
+2026-06-11,verilator,Baseline2CoreConfig,zeroload_latency,1,5000,1,95862,15005,19.1724
