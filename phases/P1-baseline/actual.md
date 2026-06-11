@@ -54,3 +54,10 @@
   - B5: 106.2 cycles/round-trip, 2 chiều đối xứng (21234/21206, 0.13%) — artifact interleaving của spike biến mất như dự đoán.
 - Parse OK: 5 rows mới vào results.csv (tổng 6), summary.csv flag `smoke` toàn bộ — đúng thiết kế (không phải data chính thức: 1 run, params giảm).
 - Phase gates tick được đến giờ: benchmark standalone ✅, B1–B5 compile + smoke pass trên Baseline2CoreConfig ✅. Còn: Baseline4/8 build (đang chạy), đo chính thức (bước 8), report.
+
+## [2026-06-11 ~22:25] Claude Code — bước 6 ĐÓNG: cả 3 baseline build PASS; march small-core xác nhận (E8)
+
+- `Baseline4CoreConfig`: PASS 1m35s, sim 14.3MB. dts: core = **rv64imafdc** (big, có FPU) → benchmark giữ MARCH=rv64gc MABI=lp64d.
+- `Baseline8CoreConfig`: PASS, sim 16.6MB. dts: core = **rv64imac** (small, KHÔNG FPU) → **expectations E8 ĐÚNG**: benchmark cho 8-core phải build MARCH=rv64imac MABI=lp64, và cần libgloss multilib `rv64imac/lp64` (P0 report bài học #5: `configure --enable-multilib="rv64imac/lp64"`). Việc này nằm trong bước chuẩn bị đo 8-core, CHƯA làm.
+- Gate "Baseline2/4/8 elaborate/build Verilator pass": ✅ cả 3. Log `p1-step6-baseline48-build.log`.
+- Còn lại P1: (a) build libgloss rv64imac/lp64 + benchmark rv64imac cho Baseline8; (b) smoke nhanh B3 NCORES=4 trên Baseline4 (xác nhận barrier với 4 hart); (c) bước 8 đo chính thức — cần chốt với Loc chạy ở đâu (M1 ~3-4h/run B1 full vs GitHub CI x86; private repo có 2000 phút/tháng); (d) report.md.
