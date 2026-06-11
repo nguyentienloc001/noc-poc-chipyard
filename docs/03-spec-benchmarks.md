@@ -5,7 +5,8 @@
 - **Bare-metal** (không OS) để loại nhiễu: crt0 + linker script + HTIF syscalls lấy từ **libgloss-htif** (chipyard submodule, đã patch + install vào `$RISCV` ở P0); headers đo nằm trong `src/benchmarks/common/`. Build standalone bằng `src/benchmarks/Makefile` theo link recipe pin ở `phases/P0-environment/report.md` — KHÔNG dùng `chipyard/tests/` (1.13 là CMake + htif_nano.specs, không hợp toolchain picolibc của image).
 - Đếm cycle bằng CSR `rdcycle` (và `rdinstret` để sanity-check), wrap trong `src/benchmarks/common/perf.h`. printf đi qua `htif_wrap.specs` (`--wrap=printf/puts/...` → HTIF console trực tiếp).
 - Mỗi benchmark: warm-up 1 lần (nạp cache/predictor) rồi đo; in kết quả qua UART/HTIF dạng `CSV:<bench>,<n_active_cores>,<param>,<cycles>,<instret>` (macro `REPORT` trong `perf.h`; config/platform lấy từ `meta.txt` do `run_sim.sh` ghi).
-- Multi-core: core 0 điều phối qua biến shared + barrier (atomic AMO); các core còn lại spin chờ.
+- Multi-core: libgloss-htif đưa hart 0 vào `main()`, hart phụ vào `__main()` (default = wfi loop) — benchmark multi-hart override bằng macro `SECONDARY_ENTRY(fn)` trong `common/sync.h` (verified spike -p2, P1 actual.md 2026-06-11). Core 0 điều phối qua biến shared + barrier (atomic AMO); binary phải build với `-DNCORES` = đúng số core của config.
+- Vòng lặp đo lặp ITERS lần phải có compiler barrier giữa các iteration (`asm volatile("" ::: "memory")`) — gcc -O2 elide pass idempotent lặp lại (phát hiện trên spike: copy chạy 1/2 ITERS → bytes/cycle bị thổi phồng).
 - Cùng một binary chạy trên cả Verilator và FPGA (chỉ khác tần số — kết quả báo theo **cycle**, không theo giây).
 
 ## 2. Danh sách benchmark

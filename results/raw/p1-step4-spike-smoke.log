@@ -1,0 +1,57 @@
+=== [2026-06-11T22:08:14+07:00] P1 step 4: build B1-B5 (NCORES=2, small params for spike smoke) ===
+riscv64-unknown-elf-gcc -O2 -Wall -march=rv64gc -mabi=lp64d -DNCORES=2 -DBUF_WORDS=8192 -DFOOTPRINT=262144 -DN_LOADS=5000 -DN_RT=200 -DITERS=2 \
+riscv64-unknown-elf-gcc -O2 -Wall -march=rv64gc -mabi=lp64d -DNCORES=2 -DBUF_WORDS=8192 -DFOOTPRINT=262144 -DN_LOADS=5000 -DN_RT=200 -DITERS=2 \
+riscv64-unknown-elf-gcc -O2 -Wall -march=rv64gc -mabi=lp64d -DNCORES=2 -DBUF_WORDS=8192 -DFOOTPRINT=262144 -DN_LOADS=5000 -DN_RT=200 -DITERS=2 \
+riscv64-unknown-elf-gcc -O2 -Wall -march=rv64gc -mabi=lp64d -DNCORES=2 -DBUF_WORDS=8192 -DFOOTPRINT=262144 -DN_LOADS=5000 -DN_RT=200 -DITERS=2 \
+riscv64-unknown-elf-gcc -O2 -Wall -march=rv64gc -mabi=lp64d -DNCORES=2 -DBUF_WORDS=8192 -DFOOTPRINT=262144 -DN_LOADS=5000 -DN_RT=200 -DITERS=2 \
+total 148
+drwxr-xr-x 7 dev dev   224 Jun 11 22:08 .
+drwxr-xr-x 7 dev dev   224 Jun 11 22:08 ..
+-rwxr-xr-x 1 dev dev 28480 Jun 11 22:08 contention_bw.riscv
+-rwxr-xr-x 1 dev dev 28448 Jun 11 22:08 core2core.riscv
+-rwxr-xr-x 1 dev dev 28744 Jun 11 22:08 loaded_latency.riscv
+-rwxr-xr-x 1 dev dev 28720 Jun 11 22:08 stream_bw.riscv
+-rwxr-xr-x 1 dev dev 28264 Jun 11 22:08 zeroload_latency.riscv
+
+=== spike single-hart: B1, B2 ===
+--- zeroload_latency:
+CSV:zeroload_latency,1,5000,15005,15005
+sink:0x80023640
+exit=0
+--- stream_bw:
+info:stream_copy,262144,22536
+info:stream_scale,262144,114700
+info:stream_add,393216,131086
+CSV:stream_bw,1,393216,163850,163853
+sink:33
+exit=0
+
+=== spike -p2 (E7 multi-hart test): B3, B4, B5 ===
+--- contention_bw:
+CSV:contention_bw,2,524288,22534,55571
+percore:0,22534
+percore:1,22534
+exit=0
+--- loaded_latency:
+CSV:loaded_latency,2,5000,15005,15005
+sink:0x800637c0
+exit=0
+--- core2core:
+c2c:0,1,1000000
+c2c:1,0,1000000
+CSV:core2core,2,200,1000000,0
+exit=0
+=== [2026-06-11T22:09:20+07:00] P1 step 4: rebuild after compiler-barrier fix, re-smoke B2/B3 ===
+BUILD ALL OK
+--- B2 (copy phải ~2x lần trước, ~45k):
+info:stream_copy,262144,45068
+info:stream_scale,262144,114700
+info:stream_add,393216,131086
+CSV:stream_bw,1,393216,163850,163853
+sink:33
+exit=0
+--- B3 -p2:
+CSV:contention_bw,2,524288,45066,80569
+percore:0,45066
+percore:1,45066
+exit=0

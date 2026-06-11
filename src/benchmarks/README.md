@@ -2,13 +2,15 @@
 
 Bare-metal C, đo bằng `rdcycle`. Spec đầy đủ: `docs/03-spec-benchmarks.md`.
 
-| File | Bench | Trạng thái |
+| File | Bench | Trạng thái (2026-06-11) |
 |---|---|---|
-| `src/zeroload_latency.c` | B1 — pointer-chase latency | Smoke pass (P0 bước 7). TODO P1: chuyển `idx[]` khỏi stack (128KB > 24K stack htif.ld) |
-| `src/stream_bw.c` | B2 — single-core STREAM | TODO (P1) — rút gọn từ B3 với NCORES=1 |
-| `src/contention_bw.c` | B3 — aggregate BW under contention | Skeleton — cần test |
-| `src/loaded_latency.c` | B4 — latency dưới tải nền | TODO (P1) — ghép B1 (core 0) + B3 (core 1..N-1) |
-| `src/core2core.c` | B5 — ping-pong NxN | TODO (P1) |
+| `src/zeroload_latency.c` | B1 — pointer-chase latency | ✅ idx[] đã chuyển static; spike pass |
+| `src/stream_bw.c` | B2 — single-core STREAM copy/scale/add/triad | ✅ spike pass; REPORT=triad, copy/scale/add ra `info:` lines |
+| `src/contention_bw.c` | B3 — aggregate BW under contention | ✅ spike -p2 pass (2 hart đều chạy); compiler-barrier fix |
+| `src/loaded_latency.c` | B4 — latency dưới tải nền (sweep `-DACTIVE_LOADERS`) | ✅ spike -p2 pass (functional — spike không model contention) |
+| `src/core2core.c` | B5 — ping-pong NxN matrix (`c2c:` lines) | ✅ spike -p2 pass (số spike = artifact interleaving, chờ Verilator) |
+
+> Spike smoke = **functional only** (timing model spike không cycle-accurate, không có contention). Số liệu thật: Verilator (P1 bước 7–8).
 
 ## Build (standalone — KHÔNG dùng chipyard/tests)
 

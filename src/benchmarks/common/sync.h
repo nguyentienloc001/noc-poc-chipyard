@@ -4,6 +4,19 @@
 
 #include <stdint.h>
 
+// --- Secondary hart entry (libgloss-htif contract, crtmain.S) ---
+// Boot hart enters main(); every other hart waits at __boot_sync then calls
+// __main() — which is a weak wfi-loop in libgloss misc/main.c. Multi-hart
+// benchmarks MUST override it. fn() runs on each secondary hart (read hartid
+// via rdhartid() from perf.h); on return the hart parks so hart 0's exit()
+// terminates the simulation cleanly.
+#define SECONDARY_ENTRY(fn)                                       \
+  void __main(void);                                              \
+  void __main(void) {                                             \
+    fn();                                                         \
+    for (;;) __asm__ __volatile__("wfi");                         \
+  }
+
 // Sense-reversing centralized barrier.
 // NOTE: the barrier itself goes through the interconnect — keep it OUT of
 // measured regions (use it only to align start/end of phases).

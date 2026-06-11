@@ -16,6 +16,8 @@
 #define N_NODES   (FOOTPRINT / STRIDE)
 
 static uint8_t arena[FOOTPRINT] __attribute__((aligned(64)));
+// static, NOT stack: 4MB/256*8 = 128KB > htif.ld 24K min stack (P0 report lesson #4)
+static uint64_t idx[N_NODES];
 
 // Build a random-permutation cycle of pointers (Sattolo). LCG for determinism.
 static uint64_t lcg(uint64_t *s) { *s = *s * 6364136223846793005ULL + 1442695040888963407ULL; return *s >> 33; }
@@ -23,8 +25,6 @@ static uint64_t lcg(uint64_t *s) { *s = *s * 6364136223846793005ULL + 1442695040
 int main(void) {
   if (rdhartid() != 0) { while (1) asm volatile("wfi"); }  // single-core bench
 
-  uint64_t **nodes = (uint64_t **)arena;
-  uint64_t idx[N_NODES];
   for (uint64_t i = 0; i < N_NODES; i++) idx[i] = i;
   uint64_t seed = 42;
   for (uint64_t i = N_NODES - 1; i > 0; i--) {           // Sattolo shuffle → one cycle
