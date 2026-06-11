@@ -71,3 +71,10 @@
 - Benchmark 8-core: build với `MARCH=rv64imac_zicsr_zifencei MABI=lp64` (perf.h csrr cũng cần zicsr; gcc map multilib về rv64imac/lp64 ✓). Spike run: 2 false-alarm do isa string spike (thiếu zicsr rồi thiếu **zicntr** — counters tách extension riêng; trace `csrr a4, cycle` illegal) → isa đúng cho spike test imac: `rv64imac_zicsr_zifencei_zicntr`. B1 imac chạy đúng, số khớp y hệt rv64gc (15005 instret). Log: `p1-step8-libgloss-imac.log`. LƯU Ý: Rocket thật có counters (dts: zihpm) — artifact này chỉ của spike.
 - CI infra đo chính thức: `src/scripts/p1-ci-measure.sh` (bootstrap từ image pinned → build sim+bench → run_sim.sh full provenance, tự build libgloss imac khi MARCH=rv64imac*) + workflow `p1-measure.yml` (dispatch theo config×bench, IMAGE_DIGEST set → meta đạt chuẩn official docs/04 §3, raw artifact → parse local).
 - Smoke B3 NCORES=4 trên Baseline4 đang chạy nền.
+
+## [2026-06-12 ~07:00] Claude Code — smoke B3 4-hart PASS: barrier/multi-hart OK ở 4 core, sublinear scaling lộ diện
+
+- B3 NCORES=4 trên Baseline4CoreConfig: `CSV:contention_bw,4,1048576,277779,80839` — percore đủ 4 dòng (273555/267475/258586/277779, spread 7.4% = contention thật giữa các core trên crossbar).
+- So sánh smoke (params nhỏ, KHÔNG chính thức): aggregate 2-core 2.66 B/c → 4-core 3.77 B/c (+42% khi gấp đôi core); per-core 1.33 → 0.94 B/c → **sublinear scaling đúng expectations E5**. Đây là dấu hiệu tốt: thí nghiệm chính (RQ1) sẽ có tín hiệu rõ.
+- Multi-hart verified: 2-hart (spike+Verilator), 4-hart (Verilator). 8-hart sẽ verify khi đo Baseline8 (binary rv64imac).
+- Pilot CI (Baseline2 × B1 full × 3 runs) đang chạy — run 27384517360.

@@ -4,4 +4,5 @@ verilator,Baseline2CoreConfig,core2core,2,200,1,21234,21234,21234,0.00,106.17,sm
 verilator,Baseline2CoreConfig,loaded_latency,2,5000,1,112919,112919,112919,0.00,22.5838,smoke
 verilator,Baseline2CoreConfig,stream_bw,1,393216,1,338751,338751,338751,0.00,1.16078,smoke
 verilator,Baseline2CoreConfig,zeroload_latency,1,5000,1,95862,95862,95862,0.00,19.1724,smoke
+verilator,Baseline4CoreConfig,contention_bw,4,1048576,1,277779,277779,277779,0.00,3.77486,smoke
 verilator,RocketConfig,zeroload_latency,1,20000,1,1052315,1052315,1052315,0.00,52.6157,smoke

@@ -10,3 +10,9 @@ if [ "/project/src/benchmarks/build/contention_bw.riscv" != "none" ] && [ ! -f "
 	 \
 	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline4CoreConfig/contention_bw.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline4CoreConfig/contention_bw.log)
 [UART] UART0 is here (stdin/stdout).
+CSV:contention_bw,4,1048576,277779,80839
+percore:0,273555
+percore:1,267475
+percore:2,258586
+percore:3,277779
+- /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.Baseline4CoreConfig/gen-collateral/TestDriver.v:158: Verilog $finish
