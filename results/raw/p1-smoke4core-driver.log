@@ -1,0 +1,16 @@
+=== [2026-06-12T06:39:04+07:00] P1: smoke B3 NCORES=4 trên Baseline4CoreConfig (verify barrier 4 hart) ===
+BUILD OK
+WARNING: IMAGE_DIGEST unset — run is NOT a valid official data point (docs/04 §3)
+>> Run 1/1
+Running with RISCV=/work/riscv
+mkdir -p /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline4CoreConfig
+if [ "/project/src/benchmarks/build/contention_bw.riscv" != "none" ] && [ ! -f "/project/src/benchmarks/build/contention_bw.riscv" ]; then printf "\n\nBinary /project/src/benchmarks/build/contention_bw.riscv not found\n\n"; exit 1; fi
+(set -o pipefail &&  /work/chipyard/sims/verilator/simulator-chipyard.harness-Baseline4CoreConfig \
+	+permissive \
+	+dramsim +dramsim_ini_dir=/work/chipyard/generators/testchipip/src/main/resources/dramsim2_ini +max-cycles=200000000   +loadmem=/project/src/benchmarks/build/contention_bw.riscv  \
+	+verbose \
+	+permissive-off \
+	/project/src/benchmarks/build/contention_bw.riscv \
+	 \
+	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline4CoreConfig/contention_bw.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline4CoreConfig/contention_bw.log)
+[UART] UART0 is here (stdin/stdout).

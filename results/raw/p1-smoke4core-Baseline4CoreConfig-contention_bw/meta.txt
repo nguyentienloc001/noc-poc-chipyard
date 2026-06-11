@@ -1,0 +1,12 @@
+date: 2026-06-12T06:39:04+07:00
+platform: verilator
+config: Baseline4CoreConfig
+binary: /project/src/benchmarks/build/contention_bw.riscv
+binary_sha256: 1b0d3642bdc05cee37bd57d6db649cfa3a9fa691900b2ddb9def2f465d6e8a74
+chipyard_commit: 69eba860a352343e4ac6b6df0f3638a79a86ec78
+project_commit: 1a2208bcbcb63acd879a2dfa3fb913aea7b8e0f2-dirty
+image: local/noc-poc-chipyard:latest
+image_digest: UNSET-not-official
+n_runs: 1
+loadmem: 1
+timeout_cycles: 200000000

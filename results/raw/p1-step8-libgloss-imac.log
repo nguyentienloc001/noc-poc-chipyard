@@ -1,0 +1,24 @@
+=== [2026-06-12T06:36:55+07:00] libgloss multilib lần 2: march có _zicsr_zifencei, install dir đổi tên về rv64imac ===
+--- gcc multilib dir cho rv64imac:
+rv64imac/lp64
+BUILD OK
+/work/riscv/riscv64-unknown-elf/lib/libgloss_htif.a
+/work/riscv/riscv64-unknown-elf/lib/rv64imac/lp64/libgloss_htif.a
+=== link + spike test rv64imac ===
+common/perf.h:21: Error: unrecognized opcode `csrr a5,mhartid', extension `zicsr' required
+make: *** [Makefile:37: build/zeroload_latency.riscv] Error 1
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  could not open build/zeroload_latency.riscv (did you misspell it? If VCS, did you forget +permissive/+permissive-off?)
+--- multilib dir cho rv64imac_zicsr_zifencei:
+rv64imac/lp64
+0
+LINK OK
+*** FAILED *** (tohost = 2)
+ Container docker-chipyard-run-0f4d773cad46 Creating 
+ Container docker-chipyard-run-0f4d773cad46 Created 
+*** FAILED *** (tohost = 2)
+
+ Container docker-chipyard-run-eb3bfb6ce17c Created 
+CSV:zeroload_latency,1,5000,15005,15005
+sink:0x800235c0
+SPIKE RV64IMAC OK

@@ -1,0 +1,96 @@
+# P1 — đo chính thức trên CI x86 (repo public → phút CI miễn phí, quyết định
+# của Loc 2026-06-12, xem P1 actual.md). Mỗi dispatch = 1 (config × bench);
+# raw logs upload làm artifact, parse vào results.csv làm LOCAL (curated,
+# parser idempotent). IMAGE_DIGEST pin → meta.txt đạt chuẩn official (docs/04 §3).
+name: p1-measure
+
+on:
+  workflow_dispatch:
+    inputs:
+      config:
+        description: "Config (Baseline2CoreConfig | Baseline4CoreConfig | Baseline8CoreConfig)"
+        required: true
+        default: "Baseline2CoreConfig"
+      bench:
+        description: "Benchmark (zeroload_latency | stream_bw | contention_bw | loaded_latency | core2core)"
+        required: true
+        default: "zeroload_latency"
+      ncores:
+        description: "NCORES (= số core của config)"
+        required: true
+        default: "2"
+      march:
+        description: "MARCH (rv64gc | rv64imac_zicsr_zifencei cho Baseline8)"
+        required: true
+        default: "rv64gc"
+      mabi:
+        description: "MABI (lp64d | lp64 cho Baseline8)"
+        required: true
+        default: "lp64d"
+      defs:
+        description: "DEFS thêm (-D...; RỖNG = full spec params — official)"
+        required: false
+        default: ""
+      n_runs:
+        description: "Số runs (official >= 3)"
+        required: true
+        default: "3"
+      timeout_cycles:
+        description: "timeout_cycles cho sim"
+        required: true
+        default: "200000000"
+
+permissions:
+  contents: read
+
+env:
+  IMAGE: locnguyen96/noc-poc-chipyard@sha256:5744085506b9d7dedff92fa89e786083586cccec14af6461c03e62da34190c14
+  IMAGE_DIGEST: sha256:5744085506b9d7dedff92fa89e786083586cccec14af6461c03e62da34190c14
+
+jobs:
+  measure:
+    runs-on: ubuntu-latest # x86_64
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+
+      - name: Pull pinned image by digest
+        run: docker pull "$IMAGE"
+
+      - name: Measure inside pinned image
+        run: |
+          mkdir -p "$RUNNER_TEMP/work" && chmod 0777 "$RUNNER_TEMP/work"
+          chmod -R a+rwX results || true
+          TAG="ci-$(date +%Y%m%d)-r${{ github.run_id }}"
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          docker run --rm \
+            -v "$PWD":/project \
+            -v "$RUNNER_TEMP/work":/work \
+            -e RISCV=/work/riscv \
+            -e MAKEFLAGS=-j"$(nproc)" \
+            -e IMAGE_DIGEST="$IMAGE_DIGEST" \
+            -e DOCKER_IMAGE=locnguyen96/noc-poc-chipyard \
+            -e DOCKER_TAG=pinned-digest \
+            -e CONFIG="${{ inputs.config }}" \
+            -e BENCH="${{ inputs.bench }}" \
+            -e NCORES="${{ inputs.ncores }}" \
+            -e MARCH="${{ inputs.march }}" \
+            -e MABI="${{ inputs.mabi }}" \
+            -e DEFS="${{ inputs.defs }}" \
+            -e N_RUNS="${{ inputs.n_runs }}" \
+            -e TIMEOUT_CYCLES="${{ inputs.timeout_cycles }}" \
+            -e TAG="$TAG" \
+            "$IMAGE" \
+            bash /project/src/scripts/p1-ci-measure.sh 2>&1 | tee measure-driver.log
+
+      - name: Upload raw results (evidence -> parse locally)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: raw-${{ inputs.config }}-${{ inputs.bench }}-${{ github.run_id }}
+          path: |
+            results/raw/ci-*
+            measure-driver.log

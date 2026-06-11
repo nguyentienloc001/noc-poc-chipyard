@@ -61,3 +61,13 @@
 - `Baseline8CoreConfig`: PASS, sim 16.6MB. dts: core = **rv64imac** (small, KHÔNG FPU) → **expectations E8 ĐÚNG**: benchmark cho 8-core phải build MARCH=rv64imac MABI=lp64, và cần libgloss multilib `rv64imac/lp64` (P0 report bài học #5: `configure --enable-multilib="rv64imac/lp64"`). Việc này nằm trong bước chuẩn bị đo 8-core, CHƯA làm.
 - Gate "Baseline2/4/8 elaborate/build Verilator pass": ✅ cả 3. Log `p1-step6-baseline48-build.log`.
 - Còn lại P1: (a) build libgloss rv64imac/lp64 + benchmark rv64imac cho Baseline8; (b) smoke nhanh B3 NCORES=4 trên Baseline4 (xác nhận barrier với 4 hart); (c) bước 8 đo chính thức — cần chốt với Loc chạy ở đâu (M1 ~3-4h/run B1 full vs GitHub CI x86; private repo có 2000 phút/tháng); (d) report.md.
+
+## [2026-06-12 ~06:40] Loc + Claude Code — quyết định: repo PUBLIC + CI đo chính thức; libgloss rv64imac xong
+
+- **Quyết định của Loc**: phương án 3 — repo public để CI không giới hạn phút. Pre-publish: quét secret toàn git history (token patterns + lịch sử .env) → SẠCH. Repo đã PUBLIC: https://github.com/nguyentienloc001/noc-poc-chipyard
+- **libgloss multilib rv64imac/lp64** (cho Baseline8, E8): 2 vòng debug —
+  1. `--enable-multilib="rv64imac/lp64"` FAIL: binutils đòi `_zicsr` trong -march (crt0.S csrr).
+  2. Fix: build với `rv64imac_zicsr_zifencei/lp64` rồi **mv thư mục install về `rv64imac/`** (tên multilib dir mà gcc tìm — verify bằng `-print-multi-directory`). PASS, `lib/rv64imac/lp64/libgloss_htif.a` ✓.
+- Benchmark 8-core: build với `MARCH=rv64imac_zicsr_zifencei MABI=lp64` (perf.h csrr cũng cần zicsr; gcc map multilib về rv64imac/lp64 ✓). Spike run: 2 false-alarm do isa string spike (thiếu zicsr rồi thiếu **zicntr** — counters tách extension riêng; trace `csrr a4, cycle` illegal) → isa đúng cho spike test imac: `rv64imac_zicsr_zifencei_zicntr`. B1 imac chạy đúng, số khớp y hệt rv64gc (15005 instret). Log: `p1-step8-libgloss-imac.log`. LƯU Ý: Rocket thật có counters (dts: zihpm) — artifact này chỉ của spike.
+- CI infra đo chính thức: `src/scripts/p1-ci-measure.sh` (bootstrap từ image pinned → build sim+bench → run_sim.sh full provenance, tự build libgloss imac khi MARCH=rv64imac*) + workflow `p1-measure.yml` (dispatch theo config×bench, IMAGE_DIGEST set → meta đạt chuẩn official docs/04 §3, raw artifact → parse local).
+- Smoke B3 NCORES=4 trên Baseline4 đang chạy nền.
