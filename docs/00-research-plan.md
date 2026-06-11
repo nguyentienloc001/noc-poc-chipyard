@@ -64,12 +64,13 @@ Tổng: ~19 tuần. P3 là rủi ro lớn nhất (xem mục 5) — bắt đầu 
 
 ## 6. Môi trường (pin sau P0)
 
-- **Docker image (root of trust)**: `<dockerhub-user>/noc-poc-chipyard` — TODO P0: pin tag + digest sau lần push đầu. Mọi số liệu Verilator phải chạy từ image này.
-- Chipyard version: `1.13.0` (TODO: xác nhận + commit hash khi setup)
+- **Docker image (root of trust)**: `locnguyen96/noc-poc-chipyard:20260611-a998101` (= `:latest` tại thời điểm pin), **digest manifest-list `sha256:5744085506b9d7dedff92fa89e786083586cccec14af6461c03e62da34190c14`** (multi-arch: linux/amd64 `sha256:a78aafb6...`, linux/arm64 `sha256:60720a5b...`; pushed 2026-06-11, P0 bước 6). Mọi số liệu Verilator phải chạy từ image này: `docker pull locnguyen96/noc-poc-chipyard@sha256:5744085506b9d7dedff92fa89e786083586cccec14af6461c03e62da34190c14`
+- Chipyard version: `1.13.0`, commit `69eba860a352343e4ac6b6df0f3638a79a86ec78` (pinned 2026-06-10, P0 bước 3)
 - Constellation: theo submodule của Chipyard
-- Verilator: từ apt trong image (Ubuntu 24.04 ≈ 5.020; chuẩn Chipyard 1.13.0 pin 5.022 — xác nhận tương thích ở P0, xem expectations E7)
-- Toolchain: `gcc-riscv64-unknown-elf` từ apt trong image (TODO P0: ghi version thật)
-- firtool: `1.75.0` (khớp `conda-reqs/circt.json` của Chipyard 1.13.0 — verified 2026-06-10), prebuilt từ CIRCT releases, pin trong Dockerfile. Lưu ý: không có binary aarch64 → arm64 dùng fallback (xem P0 E8)
+- Verilator: `5.020` từ apt trong image (chuẩn Chipyard 1.13.0 pin 5.022 — E7 đã verify ở P0 bước 4–5: verilate + sim RocketConfig pass)
+- Toolchain: `gcc-riscv64-unknown-elf 13.2.0` + `picolibc 1.8.6` từ apt trong image (khớp gcc 13.2 chuẩn CY; picolibc thay newlib — link recipe trong P0 actual.md 2026-06-11)
+- JDK: `openjdk-17` (KHÔNG dùng 21 — sbt 1.8.2 của chipyard không đọc classfile JDK21, P0 bước 4)
+- firtool: `1.75.0` (khớp `conda-reqs/circt.json` của Chipyard 1.13.0), prebuilt linux-x64 từ CIRCT releases — trên arm64 chạy qua qemu binfmt với amd64 libs trong image (E8 đã đóng, P0 bước 4; binary identical 2 arch → Verilog reproducible)
 - Vivado: `2023.1+` trên máy x86 Linux, ngoài Docker (TODO: pin version)
 
 ## 7. Tiêu chí thành công của PoC

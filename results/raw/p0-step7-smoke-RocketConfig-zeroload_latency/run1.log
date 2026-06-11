@@ -1,0 +1,16 @@
+Running with RISCV=/work/riscv
+mkdir -p /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.RocketConfig
+if [ "/work/smoke/zeroload_latency.riscv" != "none" ] && [ ! -f "/work/smoke/zeroload_latency.riscv" ]; then printf "\n\nBinary /work/smoke/zeroload_latency.riscv not found\n\n"; exit 1; fi
+(set -o pipefail &&  /work/chipyard/sims/verilator/simulator-chipyard.harness-RocketConfig \
+	+permissive \
+	+dramsim +dramsim_ini_dir=/work/chipyard/generators/testchipip/src/main/resources/dramsim2_ini +max-cycles=10000000     \
+	+verbose \
+	+permissive-off \
+	/work/smoke/zeroload_latency.riscv \
+	 \
+	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.RocketConfig/zeroload_latency.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.RocketConfig/zeroload_latency.log)
+[UART] UART0 is here (stdin/stdout).
+[10000000000] %Fatal: TestDriver.v:147: Assertion failed in TOP.TestDriver
+%Error: /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.RocketConfig/gen-collateral/TestDriver.v:147: Verilog $stop
+Aborting...
+make: *** [/work/chipyard/common.mk:319: /work/smoke/zeroload_latency.riscv.run] Error 255

@@ -49,6 +49,28 @@ git checkout <PINNED>            # docs/00 mục 6
 
 Nếu flow không-conda bế tắc (ghi vào `changes.md` của P0): fallback = image variant có conda (nặng nhưng chạy chắc chắn), vẫn giữ nguyên tắc root-of-trust.
 
+## firtool trên arm64 (E8 — chốt ở P0, 2026-06-11)
+
+CIRCT **không phát hành firtool prebuilt cho linux-aarch64** (đã kiểm tra release assets firtool-1.75.0 và maven `org.chipsalliance:llvm-firtool`). Giải pháp (không phải build-from-source):
+
+- Image arm64 ship **đúng binary linux-x64** của firtool 1.75.0, chạy qua **binfmt_misc** (qemu-x86_64; Docker Desktop có sẵn, bật Rosetta trong Settings sẽ nhanh hơn). Stage runtime cài thêm `libc6:amd64 libstdc++6:amd64 zlib1g:amd64` (multiarch, chỉ arm64, ~40MB).
+- Ưu điểm quyết định: **binary giống hệt trên cả 2 arch → Verilog output giống hệt → tái lập được** giữa M1/x86/CI. Nhược: bước firtool chậm hơn khi emulate (chỉ ảnh hưởng elaborate, không ảnh hưởng kết quả đo — đo bằng cycle count).
+- Host arm64 không phải Docker Desktop (server Linux thuần): cần cài `qemu-user-static` + binfmt trên host.
+- Nếu sau này tốc độ elaborate thành nút cổ chai (P2 sweep nhiều config): cân nhắc build CIRCT arm64 từ source (ghi lý do vào đây) hoặc elaborate trên máy x86.
+
+## Quy trình setup Chipyard không-conda (chốt ở P0)
+
+```bash
+# trong container (compose đã set RISCV=/work/riscv và PATH có /work/riscv/bin)
+cd /work
+git clone https://github.com/ucb-bar/chipyard.git && cd chipyard
+git checkout 69eba860a352343e4ac6b6df0f3638a79a86ec78   # 1.13.0, pin tại docs/00 mục 6
+./build-setup.sh riscv-tools --skip-conda --skip-ctags --skip-firesim --skip-marshal
+# step 3 của build-setup sẽ fail giữa chừng với toolchain picolibc — hoàn tất collateral bằng:
+bash /project/src/scripts/p0-step3-manual.sh 2>&1 | tee /project/results/raw/<date>-step3-manual.log
+# (script tự áp patch src/patches/0001-libgloss-htif-balign-boot_sync.patch — bug upstream, xem P0 actual.md)
+```
+
 ## Vivado (nhắc lại)
 
 Vivado KHÔNG nằm trong image — chỉ chạy x86 Linux/Windows, cài trực tiếp trên host x86. Image chỉ phục vụ Verilator flow + build benchmark. Kết quả đo bằng cycle count nên không phụ thuộc tốc độ máy chạy sim.

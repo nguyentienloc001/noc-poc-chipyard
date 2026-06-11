@@ -69,3 +69,57 @@ Project PoC luận văn thạc sĩ: chứng minh thực nghiệm NoC (Constellat
 - Không sửa trực tiếp source chipyard; mọi thay đổi qua file trong `src/chipyard-configs/` hoặc patch có ghi chú trong `docs/05-vc707-port.md`.
 - Sau mỗi thí nghiệm: cập nhật bảng trạng thái trong `docs/04-spec-experiments.md`.
 - Khi không chắc về hành vi của Chipyard/Constellation: kiểm tra docs chính thức (chipyard.readthedocs.io, constellation.readthedocs.io) thay vì đoán.
+
+## Commands thường dùng
+
+Mọi build/sim chạy **trong container** (Verilator flow). Vào container từ repo root:
+
+```bash
+cd src/docker && docker compose run --rm chipyard
+# compose set sẵn: RISCV=/work/riscv, repo mount tại /project, chipyard tại /work/chipyard
+```
+
+**Docker image (root of trust — chi tiết `src/docker/README.md`):**
+```bash
+cd src/docker
+./build.sh                 # build native (M1→arm64, x86→amd64)
+./build.sh --arch multi    # build+push manifest amd64+arm64 (cần buildx+qemu, DOCKERHUB_USER)
+docker run --rm local/noc-poc-chipyard:latest /home/dev/versions.sh   # audit tool versions
+./push.sh <tag>            # push + in digest để pin vào docs/00 mục 6
+```
+
+**Build + chạy sim (1 config):** `src/scripts/run_sim.sh` — cd vào `$CHIPYARD_DIR/sims/verilator`, ghi `meta.txt` (provenance) + chạy `N_RUNS` lần (mặc định 3).
+```bash
+src/scripts/run_sim.sh Baseline4CoreConfig --build-only          # chỉ elaborate+build verilator
+src/scripts/run_sim.sh Baseline4CoreConfig out/zeroload.riscv     # build (nếu cần) + chạy 3 lần
+N_RUNS=5 src/scripts/run_sim.sh NoCMesh2x2_4CoreConfig bench.riscv my-tag
+```
+
+**Build benchmark** (`src/benchmarks/`, reuse infra `chipyard/tests/`):
+```bash
+make -C src/benchmarks install CONFIG_CORES=4 MARCH=rv64gc   # copy sources vào tests/, in lệnh build tiếp theo
+```
+
+**Parse log → CSV:** `src/scripts/parse_results.py <results/raw/dir>` — quét dòng `CSV:<bench>,<ncores>,<param>,<cycles>,<instret>` trong `run*.log`, append vào `results/csv/results.csv`, tự flag variance >5% (rule 4).
+
+## Kiến trúc & data flow
+
+Đây **không phải codebase phần mềm thường** mà là một **harness nghiên cứu tái lập**: phần lớn "code" là configs/scripts điều khiển Chipyard, còn giá trị nằm ở quy trình đo có provenance. Chipyard source KHÔNG nằm trong repo (clone vào volume `chipyard-vol`) và KHÔNG nằm trong Docker image (tách version) — image chỉ cung cấp toolchain (sbt/firtool/verilator/riscv-gcc).
+
+Data flow một data point:
+```
+src/chipyard-configs/*.scala   (copy vào chipyard/generators/chipyard/.../config/)
+        │  elaborate (sbt + firtool)
+        ▼
+verilator simulator của <Config>     ◄── benchmark .riscv (src/benchmarks, build qua chipyard/tests)
+        │  run_sim.sh, N_RUNS=3, ghi meta.txt
+        ▼
+results/raw/<tag>-<config>-<bench>/run*.log   (in dòng "CSV:..." qua rdcycle/rdinstret)
+        │  parse_results.py
+        ▼
+results/csv/results.csv   (schema docs/04, + variance check)
+```
+
+So sánh công bằng = **một cặp config chỉ khác interconnect**: `Baseline<N>CoreConfig` (TileLink crossbar) vs `NoCMesh<RxC>_<N>CoreConfig` / `NoCRing<N>CoreConfig` (Constellation trên System Bus) — cùng số core, cùng cache. NoC configs trong `NoCResearchConfigs.scala` còn là SKELETON: `inNodeMapping`/`outNodeMapping` phải khớp tên TileLink edge của design đã elaborate, finalize ở P2.
+
+Hai tầng đo: **Verilator** (đơn vị cycle, máy nào cũng được) và **FPGA VC707** (tần số thật; VC707 không được Chipyard hỗ trợ chính thức, harness tự port — `docs/05-vc707-port.md`; bitstream build bằng Vivado trên host x86, ngoài Docker).

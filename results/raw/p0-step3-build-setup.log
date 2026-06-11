@@ -1,0 +1,98 @@
+!!!!! WARNING: No conda environment detected. Did you activate the conda environment (e.x. 'conda activate base')?
+ ========== BEGINNING STEP 2: Initializing Chipyard submodules ==========
++ git_submodule_exclude _skip
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip toolchains/riscv-tools/riscv-isa-sim
++ git config --local submodule.toolchains/riscv-tools/riscv-isa-sim.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip toolchains/riscv-tools/riscv-openocd
++ git config --local submodule.toolchains/riscv-tools/riscv-openocd.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip toolchains/riscv-tools/riscv-pk
++ git config --local submodule.toolchains/riscv-tools/riscv-pk.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip toolchains/riscv-tools/riscv-spike-devices
++ git config --local submodule.toolchains/riscv-tools/riscv-spike-devices.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip toolchains/riscv-tools/riscv-tests
++ git config --local submodule.toolchains/riscv-tools/riscv-tests.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip toolchains/riscv-tools/riscv-tools-feedstock
++ git config --local submodule.toolchains/riscv-tools/riscv-tools-feedstock.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip generators/cva6
++ git config --local submodule.generators/cva6.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip generators/ara
++ git config --local submodule.generators/ara.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip generators/nvdla
++ git config --local submodule.generators/nvdla.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip toolchains/libgloss
++ git config --local submodule.toolchains/libgloss.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip generators/gemmini
++ git config --local submodule.generators/gemmini.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip generators/rocket-chip
++ git config --local submodule.generators/rocket-chip.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip generators/compress-acc
++ git config --local submodule.generators/compress-acc.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip generators/vexiiriscv
++ git config --local submodule.generators/vexiiriscv.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip sims/firesim
++ git config --local submodule.sims/firesim.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip software/nvdla-workload
++ git config --local submodule.software/nvdla-workload.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip software/coremark
++ git config --local submodule.software/coremark.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip software/firemarshal
++ git config --local submodule.software/firemarshal.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip software/spec2017
++ git config --local submodule.software/spec2017.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip tools/dsptools
++ git config --local submodule.tools/dsptools.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip tools/rocket-dsp-utils
++ git config --local submodule.tools/rocket-dsp-utils.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip tools/circt
++ git config --local submodule.tools/circt.update none
++ for name in toolchains/*-tools/* generators/cva6 generators/ara generators/nvdla toolchains/libgloss generators/gemmini generators/rocket-chip generators/compress-acc generators/vexiiriscv sims/firesim software/nvdla-workload software/coremark software/firemarshal software/spec2017 tools/dsptools tools/rocket-dsp-utils tools/circt vlsi/hammer-mentor-plugins
++ _skip vlsi/hammer-mentor-plugins
++ git config --local submodule.vlsi/hammer-mentor-plugins.update none
++ git submodule update --init --recursive
+Skipping submodule 'generators/ara'
+Skipping submodule 'generators/compress-acc'
+Skipping submodule 'generators/cva6'
+Skipping submodule 'generators/gemmini'
+Skipping submodule 'generators/nvdla'
+Skipping submodule 'generators/rocket-chip'
+Skipping submodule 'generators/vexiiriscv'
+Skipping submodule 'sims/firesim'
+Skipping submodule 'software/coremark'
+Skipping submodule 'software/firemarshal'
+Skipping submodule 'software/nvdla-workload'
+Skipping submodule 'software/spec2017'
+Skipping submodule 'toolchains/libgloss'
+Skipping submodule 'toolchains/riscv-tools/riscv-isa-sim'
+Skipping submodule 'toolchains/riscv-tools/riscv-openocd'
+Skipping submodule 'toolchains/riscv-tools/riscv-pk'
+Skipping submodule 'toolchains/riscv-tools/riscv-spike-devices'
+Skipping submodule 'toolchains/riscv-tools/riscv-tests'
+Skipping submodule 'toolchains/riscv-tools/riscv-tools-feedstock'
+Skipping submodule 'tools/circt'
+Skipping submodule 'tools/dsptools'
+Skipping submodule 'tools/rocket-dsp-utils'
+Skipping submodule 'vlsi/hammer-mentor-plugins'
+ ========== BEGINNING STEP 3: Building toolchain collateral ==========
+build-setup.sh: ERROR: If conda initialization skipped, $RISCV variable must be defined.

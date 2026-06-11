@@ -1,0 +1,557 @@
+=== [2026-06-11T05:49:02+07:00] libgloss rebuild: --disable-multilib (root cause: apt multilib list has rv32e, unsupported by crt0.S) ===
+=== gcc --print-multi-lib (for the record / P1 note) ===
+.;
+rv32e/ilp32e;@march=rv32e@mabi=ilp32e
+rv32ea/ilp32e;@march=rv32ea@mabi=ilp32e
+rv32em/ilp32e;@march=rv32em@mabi=ilp32e
+rv32eac/ilp32e;@march=rv32eac@mabi=ilp32e
+rv32emac/ilp32e;@march=rv32emac@mabi=ilp32e
+rv32i/ilp32;@march=rv32i@mabi=ilp32
+rv32ia/ilp32;@march=rv32ia@mabi=ilp32
+rv32im/ilp32;@march=rv32im@mabi=ilp32
+rv32if/ilp32f;@march=rv32if@mabi=ilp32f
+rv32ifd/ilp32d;@march=rv32ifd@mabi=ilp32d
+rv32iaf/ilp32f;@march=rv32iaf@mabi=ilp32f
+rv32iafd/ilp32d;@march=rv32iafd@mabi=ilp32d
+rv32imf/ilp32f;@march=rv32imf@mabi=ilp32f
+rv32imfd/ilp32d;@march=rv32imfd@mabi=ilp32d
+rv32iac/ilp32;@march=rv32iac@mabi=ilp32
+rv32imac/ilp32;@march=rv32imac@mabi=ilp32
+rv32imafc/ilp32f;@march=rv32imafc@mabi=ilp32f
+rv32imafdc/ilp32d;@march=rv32imafdc@mabi=ilp32d
+rv64i/lp64;@march=rv64i@mabi=lp64
+rv64ia/lp64;@march=rv64ia@mabi=lp64
+rv64im/lp64;@march=rv64im@mabi=lp64
+rv64if/lp64f;@march=rv64if@mabi=lp64f
+rv64ifd/lp64d;@march=rv64ifd@mabi=lp64d
+rv64iaf/lp64f;@march=rv64iaf@mabi=lp64f
+rv64iafd/lp64d;@march=rv64iafd@mabi=lp64d
+rv64imf/lp64f;@march=rv64imf@mabi=lp64f
+rv64iac/lp64;@march=rv64iac@mabi=lp64
+rv64imac/lp64;@march=rv64imac@mabi=lp64
+rv64imafc/lp64f;@march=rv64imafc@mabi=lp64f
+checking for riscv64-unknown-elf-gcc... riscv64-unknown-elf-gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... yes
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether riscv64-unknown-elf-gcc accepts -g... yes
+checking for riscv64-unknown-elf-gcc option to accept ISO C89... none needed
+checking for riscv64-unknown-elf-ar... riscv64-unknown-elf-ar
+checking for riscv64-unknown-elf-size... riscv64-unknown-elf-size
+checking whether multilib is enabled... no
+configure: creating ./config.status
+config.status: creating Makefile
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o misc/traps.o ../misc/traps.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o misc/tls.o ../misc/tls.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o misc/main.o ../misc/main.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o misc/htif.o ../misc/htif.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/nanosleep.o ../sys/nanosleep.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/access.o ../sys/access.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/chdir.o ../sys/chdir.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/chmod.o ../sys/chmod.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/chown.o ../sys/chown.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/close.o ../sys/close.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/execve.o ../sys/execve.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/exit.o ../sys/exit.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/fork.o ../sys/fork.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/faccessat.o ../sys/faccessat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/fstat.o ../sys/fstat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/fstatat.o ../sys/fstatat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/ftime.o ../sys/ftime.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/getcwd.o ../sys/getcwd.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/gettimeofday.o ../sys/gettimeofday.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/getpid.o ../sys/getpid.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/isatty.o ../sys/isatty.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/link.o ../sys/link.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/kill.o ../sys/kill.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/lseek.o ../sys/lseek.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/lstat.o ../sys/lstat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/open.o ../sys/open.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/openat.o ../sys/openat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/read.o ../sys/read.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/sbrk.o ../sys/sbrk.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/stat.o ../sys/stat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/sysconf.o ../sys/sysconf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/times.o ../sys/times.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/unlink.o ../sys/unlink.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/utime.o ../sys/utime.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/wait.o ../sys/wait.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/write.o ../sys/write.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/vxprintf.o ../libc/stdio/vxprintf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/printf.o ../libc/stdio/printf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/sprintf.o ../libc/stdio/sprintf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/snprintf.o ../libc/stdio/snprintf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/puts.o ../libc/stdio/puts.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/printbuf.o ../libc/stdio/printbuf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -D__ASSEMBLY__ -c -o misc/crt0.o ../misc/crt0.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -D__ASSEMBLY__ -c -o misc/crtmain.o ../misc/crtmain.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -D__ASSEMBLY__ -c -o misc/crtmain-argv.o ../misc/crtmain-argv.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -D__ASSEMBLY__ -c -o misc/init.o ../misc/init.S
+riscv64-unknown-elf-ar rcs libgloss_htif.a misc/traps.o misc/tls.o misc/main.o misc/htif.o sys/nanosleep.o sys/access.o sys/chdir.o sys/chmod.o sys/chown.o sys/close.o sys/execve.o sys/exit.o sys/faccessat.o sys/fork.o sys/fstat.o sys/fstatat.o sys/ftime.o sys/getcwd.o sys/getpid.o sys/gettimeofday.o sys/isatty.o sys/kill.o sys/link.o sys/lseek.o sys/lstat.o sys/open.o sys/openat.o sys/read.o sys/sbrk.o sys/stat.o sys/sysconf.o sys/times.o sys/unlink.o sys/utime.o sys/wait.o sys/write.o libc/stdio/vxprintf.o libc/stdio/printf.o libc/stdio/sprintf.o libc/stdio/snprintf.o libc/stdio/puts.o libc/stdio/printbuf.o misc/crt0.o misc/crtmain.o misc/crtmain-argv.o misc/init.o
+install -m 644 -p -D -t /work/riscv/riscv64-unknown-elf/lib// libgloss_htif.a ../util/htif.specs ../util/htif_nano.specs ../util/htif_wrap.specs ../util/htif_argv.specs ../util/htif.ld
+Makefile:147: *** libdir is not in riscv64-unknown-elf-gcc library search path: /work/riscv/riscv64-unknown-elf/lib.  Stop.
+=== verify install ===
+-rw-r--r-- 1 dev dev  3538 Jun 10 22:13 htif.ld
+-rw-r--r-- 1 dev dev   600 Jun 10 22:13 htif.specs
+-rw-r--r-- 1 dev dev   212 Jun 10 22:13 htif_argv.specs
+-rw-r--r-- 1 dev dev   646 Jun 10 22:13 htif_nano.specs
+-rw-r--r-- 1 dev dev   207 Jun 10 22:13 htif_wrap.specs
+-rw-r--r-- 1 dev dev 90032 Jun 11 05:49 libgloss_htif.a
+=== specs content (picolibc x htif interaction preview for step 7) ===
+--- /work/riscv/riscv64-unknown-elf/lib/htif.specs
+# Equivalent to gcc options:
+# -mcmodel=medany -Wl,--start-group -lc -lgloss_htif -Wl,--end-group -lgcc -static -nostartfiles -dT htif.ld
+
+%rename cc1 htif_cc1
+%rename lib htif_lib
+%rename link htif_link
+%rename startfile htif_startfile
+%rename endfile htif_endfile
+
+*cc1:
+%(htif_cc1) -mcmodel=medany
+
+*lib:
+--start-group -lc %{!specs=nosys.specs:-lgloss_htif} --end-group
+
+# FIXME: %T sequence is not used to specify a linker script since it
+# does not search the current working directory
+*link:
+%(htif_link) %:replace-outfile(-lgloss -lgloss_htif) -dT htif.ld%s -static
+
+*startfile:
+
+
+*endfile:
+
+
+--- /work/riscv/riscv64-unknown-elf/lib/htif_argv.specs
+%rename link htif_argv_link
+
+# Add code to retrieve argument vector from frontend server
+*link:
+%(htif_argv_link) \
+    --defsym=_start_main=_start_main_argv \
+    --defsym=_start_secondary=_start_secondary_argv
+--- /work/riscv/riscv64-unknown-elf/lib/htif_nano.specs
+# Equivalent to gcc options:
+# -mcmodel=medany -Wl,--start-group -lc_nano -lgloss_htif -Wl,--end-group -lgcc -static -nostartfiles -dT htif.ld
+
+%include <nano.specs>
+
+%rename cc1 htif_nano_cc1
+%rename link htif_nano_link
+%rename startfile htif_nano_startfile
+%rename endfile htif_nano_endfile
+
+*cc1:
+%(htif_nano_cc1) -mcmodel=medany
+
+*nano_libgloss:
+%{specs=nosys.specs:-lnosys} %{!specs=nosys.specs:-lgloss_htif}
+
+# FIXME: %T sequence is not used to specify a linker script since it
+# does not search the current working directory
+*link:
+%(htif_nano_link) %:replace-outfile(-lgloss -lgloss_htif) -dT htif.ld%s -static
+
+*startfile:
+
+
+*endfile:
+
+
+--- /work/riscv/riscv64-unknown-elf/lib/htif_wrap.specs
+%rename link htif_wrap_link
+
+# Replace libc functions with custom implementations from libgloss_htif
+*link:
+%(htif_wrap_link) \
+    --wrap=puts \
+    --wrap=printf \
+    --wrap=sprintf \
+    --wrap=snprintf
+
+=== [2026-06-11T05:49:49+07:00] smoke test: link hello.c with picolibc + htif specs, run on spike ===
+--- attempt 1: picolibc.specs + htif.specs (chained, -B for search path)
+/usr/lib/gcc/riscv64-unknown-elf/13.2.0/../../../riscv64-unknown-elf/bin/ld: /usr/lib/picolibc/riscv64-unknown-elf/lib/./libc.a(libc_tinystdio_puts.c.o): in function `puts':
+./riscv64-unknown-elf/../../../newlib/libc/tinystdio/puts.c:36:(.text.puts+0x4): undefined reference to `stdout'
+/usr/lib/gcc/riscv64-unknown-elf/13.2.0/../../../riscv64-unknown-elf/bin/ld: /work/riscv/riscv64-unknown-elf/lib/libgloss_htif.a(crt0.o): in function `_start':
+(.text.init+0xe4): undefined reference to `__stack_shift'
+(.text.init+0xe4): relocation truncated to fit: R_RISCV_HI20 against undefined symbol `__stack_shift'
+collect2: error: ld returned 1 exit status
+LINK FAIL (attempt 1)
+
+=== [2026-06-11T05:51:22+07:00] evidence: how chipyard/tests builds (canonical flags) ===
+CMakeLists.txt
+README.md
+accum.c
+big-blkdev.c
+blkdev.c
+blkdev.h
+charcount.c
+cpp-hello.cpp
+fft.c
+gcd.c
+30:set(CMAKE_LINKER        "${TOOLCHAIN_PREFIX}ld")
+51:set(SPECS               "htif_nano.specs")
+52:set(SPEC_FLAGS          -specs=${SPECS})
+54:# linker script
+55:set(LINKER_SCRIPT       "htif.ld")
+65:add_link_options(-T ${LINKER_SCRIPT})
+
+=== attempt 2: explicit -T htif.ld + htif_wrap.specs ===
+cc1: fatal error: hello.c: No such file or directory
+compilation terminated.
+LINK FAIL (attempt 2)
+
+=== [2026-06-11T05:51:39+07:00] attempt 2b: explicit -T htif.ld + htif_wrap.specs (hello.c in /work/smoke, persistent) ===
+/usr/lib/gcc/riscv64-unknown-elf/13.2.0/../../../riscv64-unknown-elf/bin/ld: warning: hello.riscv has a LOAD segment with RWX permissions
+LINK OK
+  Class:                             ELF64
+  Machine:                           RISC-V
+  Entry point address:               0x80000000
+--- run on spike:
+timeout: failed to run command ‘spike’: No such file or directory
+SPIKE RUN FAIL (exit 127)
+
+=== [2026-06-11T05:51:52+07:00] spike run (full path /work/riscv/bin/spike) ===
+elf2hex
+espresso
+spike
+spike-dasm
+spike-log-parser
+termios-xspike
+uart_tsi
+xspike
+*** FAILED *** (tohost = 6)
+SPIKE RUN FAIL (exit 6)
+
+=== [2026-06-11T05:52:35+07:00] isolate: t1=return0, t2=raw htif write via puts no-newline, t3=printf ===
+--- t1 (empty main):
+*** FAILED *** (tohost = 6)
+exit=6
+--- t2 (puts):
+*** FAILED *** (tohost = 6)
+exit=6
+
+=== [2026-06-11T05:53:19+07:00] evidence: who defines exit/_exit ===
+--- libgloss_htif.a:
+0000000000000000 T _exit
+--- picolibc libc.a:
+0000000000000000 T exit
+
+=== attempt 3: force libgloss archive before -lc (explicit archive on cmdline) ===
+--- t1b (empty main + explicit archive):
+*** FAILED *** (tohost = 6)
+exit=6
+--- t2b (puts + explicit archive):
+*** FAILED *** (tohost = 6)
+exit=6
+--- hellob (printf + explicit archive):
+*** FAILED *** (tohost = 6)
+exit=6
+
+=== [2026-06-11T05:53:51+07:00] trace: spike -l last 40 instructions of t1b ===
+exit=6
+core   0: 0x0000000080000318 (0x00000001) c.nop
+core   0: 0x000000008000031a (0x0000b7d5) c.j     pc - 28
+core   0: 0x00000000800002fe (0x00000797) auipc   a5, 0x0
+core   0: 0x0000000080000302 (0x28a78793) addi    a5, a5, 650
+core   0: 0x0000000080000306 (0x0007b023) sd      zero, 0(a5)
+core   0: 0x000000008000030a (0x00000797) auipc   a5, 0x0
+core   0: 0x000000008000030e (0x27678793) addi    a5, a5, 630
+core   0: 0x0000000080000312 (0xfe843703) ld      a4, -24(s0)
+core   0: 0x0000000080000316 (0x0000e398) c.sd    a4, 0(a5)
+core   0: 0x0000000080000318 (0x00000001) c.nop
+core   0: 0x000000008000031a (0x0000b7d5) c.j     pc - 28
+core   0: 0x00000000800002fe (0x00000797) auipc   a5, 0x0
+core   0: 0x0000000080000302 (0x28a78793) addi    a5, a5, 650
+core   0: 0x0000000080000306 (0x0007b023) sd      zero, 0(a5)
+core   0: 0x000000008000030a (0x00000797) auipc   a5, 0x0
+core   0: 0x000000008000030e (0x27678793) addi    a5, a5, 630
+core   0: 0x0000000080000312 (0xfe843703) ld      a4, -24(s0)
+core   0: 0x0000000080000316 (0x0000e398) c.sd    a4, 0(a5)
+core   0: 0x0000000080000318 (0x00000001) c.nop
+core   0: 0x000000008000031a (0x0000b7d5) c.j     pc - 28
+core   0: 0x00000000800002fe (0x00000797) auipc   a5, 0x0
+core   0: 0x0000000080000302 (0x28a78793) addi    a5, a5, 650
+core   0: 0x0000000080000306 (0x0007b023) sd      zero, 0(a5)
+core   0: 0x000000008000030a (0x00000797) auipc   a5, 0x0
+core   0: 0x000000008000030e (0x27678793) addi    a5, a5, 630
+core   0: 0x0000000080000312 (0xfe843703) ld      a4, -24(s0)
+core   0: 0x0000000080000316 (0x0000e398) c.sd    a4, 0(a5)
+core   0: 0x0000000080000318 (0x00000001) c.nop
+core   0: 0x000000008000031a (0x0000b7d5) c.j     pc - 28
+core   0: 0x00000000800002fe (0x00000797) auipc   a5, 0x0
+core   0: 0x0000000080000302 (0x28a78793) addi    a5, a5, 650
+core   0: 0x0000000080000306 (0x0007b023) sd      zero, 0(a5)
+core   0: 0x000000008000030a (0x00000797) auipc   a5, 0x0
+core   0: 0x000000008000030e (0x27678793) addi    a5, a5, 630
+core   0: 0x0000000080000312 (0xfe843703) ld      a4, -24(s0)
+core   0: 0x0000000080000316 (0x0000e398) c.sd    a4, 0(a5)
+core   0: 0x0000000080000318 (0x00000001) c.nop
+core   0: 0x000000008000031a (0x0000b7d5) c.j     pc - 28
+core   0: 0x00000000800002fe (0x00000797) auipc   a5, 0x0
+core   0: 0x0000000080000302 (0x28a78793) addi    a5, a5, 650
+
+=== libgloss traps.c (what does trap handler do) ===
+#include <stdint.h>
+#include "syscall.h"
+
+void __attribute__((weak)) handle_trap(uintptr_t epc, uintptr_t cause, uintptr_t tval, uintptr_t regs[32])
+{
+    /* Extract low-order bits of exception code as positive int */
+    int code = cause & ((1UL << ((sizeof(int)<<3)-1)) - 1);
+    /* Encode interrupt as negative value */
+    code = ((intptr_t)cause < 0) ? -code : code;
+    _exit(code);
+    __builtin_unreachable();
+}
+
+=== [2026-06-11T05:54:27+07:00] find exception in trace ===
+531:core   0: exception trap_store_address_misaligned, epc 0x00000000800001f4
+533:core   0: >>>>  trap_entry
+573:core   0: >>>>  handle_trap
+--- context around first exception:
+core   0: 0x000000008000053e (0x00008082) ret
+core   0: 0x0000000080000142 (0x0000a075) c.j     pc + 172
+core   0: >>>>  _start_main
+core   0: 0x00000000800001ee (0x000052fd) c.li    t0, -1
+core   0: 0x00000000800001f0 (0x0110000f) fence   w,w
+core   0: 0x00000000800001f4 (0x8051a8a3) sw      t0, -2031(gp)
+core   0: exception trap_store_address_misaligned, epc 0x00000000800001f4
+core   0:           tval 0x00000000800005a1
+core   0: >>>>  trap_entry
+core   0: 0x0000000080000144 (0x34011073) csrw    mscratch, sp
+core   0: 0x0000000080000148 (0x00007111) c.addi16sp sp, -256
+
+=== disassemble around faulting pc ===
+epc=0x00000000800001f4
+
+=== which symbol contains epc ===
+awk: line 2: function strtonum never defined
+awk: line 2: function strtonum never defined
+
+=== [2026-06-11T05:55:05+07:00] symbols around 0x800005a1 ===
+0000000080000590 D environ
+0000000080000598 b __bss_start
+0000000080000598 b initial_env
+00000000800005a0 B __lock___libc_recursive_mutex
+00000000800005a1 b __boot_sync
+00000000800005a8 b on_exits
+00000000800008a8 b __bss_end
+0000000080000d90 D __global_pointer$
+0000000080021000 B __stack_start
+41:000000008000050e T __riscv_save_0
+42:000000008000050e T __riscv_save_1
+43:0000000080000516 T __riscv_restore_12
+44:000000008000051a T __riscv_restore_10
+45:000000008000051a T __riscv_restore_11
+46:0000000080000520 T __riscv_restore_8
+47:0000000080000520 T __riscv_restore_9
+48:0000000080000526 T __riscv_restore_6
+49:0000000080000526 T __riscv_restore_7
+50:000000008000052c T __riscv_restore_4
+51:000000008000052c T __riscv_restore_5
+52:0000000080000532 T __riscv_restore_2
+53:0000000080000532 T __riscv_restore_3
+54:0000000080000538 T __riscv_restore_0
+55:0000000080000538 T __riscv_restore_1
+56:0000000080000540 r __tbss_end
+57:0000000080000540 r __tbss_start
+58:0000000080000540 r __tdata_start
+59:0000000080000540 r argv
+60:0000000080000550 r name
+--- section table:
+
+t1b.riscv:     file format elf64-littleriscv
+
+Sections:
+Idx Name          Size      VMA               LMA               File off  Algn
+  0 .text         00000540  0000000080000000  0000000080000000  00001000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .rodata       00000019  0000000080000540  0000000080000540  00001540  2**3
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  2 .htif         00000010  0000000080000580  0000000080000580  00001580  2**3
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .sdata        00000008  0000000080000590  0000000080000590  00001590  2**3
+                  CONTENTS, ALLOC, LOAD, DATA
+  4 .bss          00000310  0000000080000598  0000000080000598  00001598  2**3
+                  ALLOC
+  5 .comment      00000022  0000000000000000  0000000000000000  00001598  2**0
+                  CONTENTS, READONLY
+  6 .riscv.attributes 0000004b  0000000000000000  0000000000000000  000015ba  2**0
+                  CONTENTS, READONLY
+  7 .debug_line   00000a10  0000000000000000  0000000000000000  00001605  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  8 .debug_line_str 000002c1  0000000000000000  0000000000000000  00002015  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  9 .debug_info   00000bcd  0000000000000000  0000000000000000  000022d6  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 10 .debug_abbrev 000006e4  0000000000000000  0000000000000000  00002ea3  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 11 .debug_aranges 00000260  0000000000000000  0000000000000000  00003590  2**4
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 12 .debug_str    0000064a  0000000000000000  0000000000000000  000037f0  2**0
+--- crt0.S _start_main source:
+    tail _start_main
+
+    .cfi_endproc
+
+
+    .align 2
+trap_entry:
+    csrw mscratch, sp
+    addi sp, sp, -(32*REGBYTES)
+
+    /* Save trap frame */
+    SREG x1, 1*REGBYTES(sp)
+    csrr x1, mscratch
+    SREG x1, 2*REGBYTES(sp)
+    SREG x3, 3*REGBYTES(sp)
+    SREG x4, 4*REGBYTES(sp)
+--- htif.ld sdata/sbss region:
+    .data : ALIGN (8) {
+        *(.data)
+        *(.gnu.linkonce.d.*)
+    }
+
+    .sdata : {
+        PROVIDE (__global_pointer$ = . + 0x800);
+        *(.sdata .sdata.*)
+        *(.gnu.linkonce.s.*)
+        *(.srodata.cst16)
+        *(.srodata.cst8)
+        *(.srodata.cst4)
+        *(.srodata.cst2)
+        *(.srodata .srodata.*)
+    }
+
+    PROVIDE (_edata = .);
+
+    .bss : ALIGN (8) {
+        PROVIDE_HIDDEN (__bss_start = .);
+        *(.sbss .sbss.*)
+        *(.gnu.linkonce.sb.*)
+        *(.bss .bss.*)
+        *(.gnu.linkonce.b.*)
+        *(COMMON)
+        PROVIDE_HIDDEN (__bss_end = .);
+    }
+
+    . = ALIGN (8);
+    PROVIDE (_end = .);
+
+    /* Reserve heap space */
+    PROVIDE(__heap_size = 128K);
+    . += __heap_size;
+    . = ALIGN (4K);
+    PROVIDE (__heap_end = .);
+
+    /* Place Thread Control Block (TCB) at bottom of hart stack */
+    PROVIDE (__tcb_size = __tbss_end - __tdata_start);
+    PROVIDE (__stack_align = MAX (ALIGNOF (.tdata), 0x10));
+    PROVIDE (__stack_start = ALIGN (__stack_align));
+
+=== [2026-06-11T05:55:41+07:00] __boot_sync definition site ===
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-12-    .endm
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-13-
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-14-    .global _start_main
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-15-    .type _start_main, @function
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-16-_start_main:
+/work/chipyard/toolchains/libgloss/misc/crtmain.S:17:    BARRIER_PASS __boot_sync
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-18-    ENTER main
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-19-
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-20-    .global _start_secondary
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-21-    .type _start_secondary, @function
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-22-_start_secondary:
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-23-    /* Synchronize secondary harts */
+/work/chipyard/toolchains/libgloss/misc/crtmain.S:24:    BARRIER_WAIT __boot_sync
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-25-    ENTER __main
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-26-
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-27-
+--
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-32-    .dc.a 0
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-33-name:
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-34-    .asciz "chipyard"
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-35-
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-36-    .bss
+/work/chipyard/toolchains/libgloss/misc/crtmain.S:37:__boot_sync:
+/work/chipyard/toolchains/libgloss/misc/crtmain.S-38-    .word 0
+--
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-26-    lw a0, 0(sp)        /* argc = buf[0] */
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-27-    addi a1, sp, 8      /* argv = buf + 1 */
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-28-    sw a0, argc, t0
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-29-    SREG a1, argv, t0
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-30-
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S:31:    BARRIER_PASS __boot_sync
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-32-
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-33-    LREG a2, environ    /* envp */
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-34-    call main
+--
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-38-
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-39-    .global _start_secondary_argv
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-40-    .type _start_secondary_argv, @function
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-41-_start_secondary_argv:
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-42-    /* Synchronize secondary harts */
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S:43:    BARRIER_WAIT __boot_sync
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-44-
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-45-    lw a0, argc
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-46-    LREG a1, argv
+--
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-53-    .align 3
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-54-argv:
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-55-    .dc.a 0
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-56-argc:
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-57-    .word 0
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S:58:__boot_sync:
+/work/chipyard/toolchains/libgloss/misc/crtmain-argv.S-59-    .word 0
+--- section alignment of crt0.o:
+  2 .bss          00000000  0000000000000000  0000000000000000  00000040  2**0
+                  ALLOC
+
+=== [2026-06-11T05:56:35+07:00] fix: .balign 4 before __boot_sync (crtmain.S + crtmain-argv.S), generate patch ===
+tee: /project/src/patches/0001-libgloss-htif-balign-boot_sync.patch.body: No such file or directory
+diff --git a/misc/crtmain-argv.S b/misc/crtmain-argv.S
+index 169f240..e93d9d8 100644
+--- a/misc/crtmain-argv.S
++++ b/misc/crtmain-argv.S
+@@ -55,5 +55,6 @@ argv:
+     .dc.a 0
+ argc:
+     .word 0
++    .balign 4
+ __boot_sync:
+     .word 0
+diff --git a/misc/crtmain.S b/misc/crtmain.S
+index 457ffb6..e358290 100644
+--- a/misc/crtmain.S
++++ b/misc/crtmain.S
+@@ -34,5 +34,6 @@ name:
+     .asciz "chipyard"
+ 
+     .bss
++    .balign 4
+ __boot_sync:
+     .word 0
+=== rebuild libgloss (--disable-multilib) ===
+BUILD OK
+install -m 644 -p -D -t /work/riscv/riscv64-unknown-elf/lib// libgloss_htif.a ../util/htif.specs ../util/htif_nano.specs ../util/htif_wrap.specs ../util/htif_argv.specs ../util/htif.ld
+Makefile:147: *** libdir is not in riscv64-unknown-elf-gcc library search path: /work/riscv/riscv64-unknown-elf/lib.  Stop.
+WARN: make install exited nonzero at libdir-check (expected with apt toolchain; verifying files below)
+-rw-r--r-- 1 dev dev 90032 Jun 11 05:56 /work/riscv/riscv64-unknown-elf/lib/libgloss_htif.a
+=== re-run spike tests ===
+--- t1:
+exit=0
+--- t2:
+t2 puts works
+exit=0
+--- hello:
+Hello HTIF from libgloss+picolibc
+exit=0
+00000000800005a0 B __lock___libc_recursive_mutex
+00000000800005a4 b __boot_sync

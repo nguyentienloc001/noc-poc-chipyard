@@ -1,0 +1,35 @@
+Fix misaligned __boot_sync causing store-misaligned trap (mcause=6) at boot.
+
+Upstream bug in ucb-bar/libgloss-htif @ 39234a16: __boot_sync (.word, written
+by sw in BARRIER_PASS) is declared in .bss without an alignment directive, so
+crtmain.o's .bss has alignment 1. With the Ubuntu apt picolibc toolchain, the
+1-byte __lock___libc_recursive_mutex lands immediately before it and
+__boot_sync ends up at an odd address -> sw traps -> handle_trap -> _exit(6).
+Latent with newlib (conda flow) only by link-order luck; would also trap on
+real Rocket cores, not just spike.
+
+Apply: git -C /work/chipyard/toolchains/libgloss apply <this file>
+Diagnosed: phases/P0-environment/actual.md 2026-06-11, log results/raw/p0-step3e-libgloss.log
+
+diff --git a/misc/crtmain-argv.S b/misc/crtmain-argv.S
+index 169f240..e93d9d8 100644
+--- a/misc/crtmain-argv.S
++++ b/misc/crtmain-argv.S
+@@ -55,5 +55,6 @@ argv:
+     .dc.a 0
+ argc:
+     .word 0
++    .balign 4
+ __boot_sync:
+     .word 0
+diff --git a/misc/crtmain.S b/misc/crtmain.S
+index 457ffb6..e358290 100644
+--- a/misc/crtmain.S
++++ b/misc/crtmain.S
+@@ -34,5 +34,6 @@ name:
+     .asciz "chipyard"
+
+     .bss
++    .balign 4
+ __boot_sync:
+     .word 0

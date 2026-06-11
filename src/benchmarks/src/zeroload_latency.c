@@ -5,10 +5,15 @@
 #include <stdio.h>
 #include "perf.h"
 
+// Defaults per docs/03 spec; overridable with -D for pipeline smoke tests (P0 step 7)
+#ifndef FOOTPRINT
 #define FOOTPRINT (4 * 1024 * 1024)            // 4MB > L2 512KB
+#endif
+#ifndef N_LOADS
+#define N_LOADS   100000                        // measured loads (Verilator-friendly)
+#endif
 #define STRIDE    256                           // > cache line (64B), beats prefetcher
 #define N_NODES   (FOOTPRINT / STRIDE)
-#define N_LOADS   100000                        // measured loads (Verilator-friendly)
 
 static uint8_t arena[FOOTPRINT] __attribute__((aligned(64)));
 

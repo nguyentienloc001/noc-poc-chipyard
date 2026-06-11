@@ -1,0 +1,2 @@
+date,platform,config,benchmark,n_active_cores,param,run_idx,cycles,instret,derived_metric
+2026-06-11,verilator,RocketConfig,zeroload_latency,1,20000,1,1052315,60005,52.6157

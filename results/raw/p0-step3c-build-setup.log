@@ -1,0 +1,22 @@
+!!!!! WARNING: No conda environment detected. Did you activate the conda environment (e.x. 'conda activate base')?
+ ========== BEGINNING STEP 3: Building toolchain collateral ==========
+Installing extra toolchain utilities/tests to /work/riscv
+==>  Installing Spike
+=>  Starting riscv-isa-sim build
+==>  Initializing riscv-isa-sim submodule
++ git submodule update --init --recursive /work/chipyard/toolchains/riscv-tools/riscv-isa-sim
+==>  cd /work/chipyard/toolchains/riscv-tools/riscv-isa-sim
+==>  Removing existing riscv-isa-sim/build directory
++ rm -rf build
++ mkdir -p build
+==>  Configuring riscv-isa-sim
++ cd build
++ ../configure --prefix=/work/riscv --with-boost=no --with-boost-asio=no --with-boost-regex=no
+checking build system type... aarch64-unknown-linux-gnu
+checking host system type... aarch64-unknown-linux-gnu
+checking for gcc... gcc
+checking whether the C compiler works... no
+configure: error: in `/work/chipyard/toolchains/riscv-tools/riscv-isa-sim/build':
+configure: error: C compiler cannot create executables
+See `config.log' for more details
+build-setup.sh: Build script failed with exit code 77 at step 3: Building toolchain collateral

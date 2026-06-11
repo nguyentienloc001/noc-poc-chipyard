@@ -1,0 +1,45 @@
+# P0 bước 6b: chứng minh root-of-trust trên x86 thật (GitHub runner = x86_64),
+# từ image pull theo DIGEST đã pin ở docs/00 §6. Trigger tay (workflow_dispatch)
+# để kiểm soát phút CI; log đầy đủ upload làm artifact (bằng chứng cho actual.md).
+name: p0-x86-verify
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  IMAGE: locnguyen96/noc-poc-chipyard@sha256:5744085506b9d7dedff92fa89e786083586cccec14af6461c03e62da34190c14
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest # x86_64
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+
+      # chipyard + submodules + build artifacts ~10GB; runner mặc định còn ~14GB
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+
+      - name: Pull pinned image by digest
+        run: docker pull "$IMAGE"
+
+      - name: Run verification inside pinned image
+        run: |
+          mkdir -p "$RUNNER_TEMP/work" && chmod 0777 "$RUNNER_TEMP/work"
+          docker run --rm \
+            -v "$PWD":/project:ro \
+            -v "$RUNNER_TEMP/work":/work \
+            -e RISCV=/work/riscv \
+            -e MAKEFLAGS=-j"$(nproc)" \
+            "$IMAGE" \
+            bash /project/src/scripts/p0-step6-x86-verify.sh 2>&1 | tee p0-step6-x86-verify.log
+
+      - name: Upload log (evidence for phases/P0 actual.md)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-step6-x86-verify-log
+          path: p0-step6-x86-verify.log

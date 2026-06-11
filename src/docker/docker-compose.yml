@@ -7,11 +7,16 @@ services:
     volumes:
       - ../..:/project           # repo root (compose file nằm ở src/docker/)
       - chipyard-vol:/work       # chipyard source + build output (persist)
+      - home-vol:/home/dev       # sbt/coursier/ivy cache (persist — tránh re-fetch mỗi lần run --rm)
     working_dir: /work
     environment:
       - MAKEFLAGS=-j8            # chỉnh theo số core máy
+      - RISCV=/work/riscv        # install prefix cho spike/pk/tests (flow không-conda, P0 E9)
+      # /work/riscv/bin lên đầu PATH: spike/elf2hex/espresso install vào volume (P0 step 3)
+      - PATH=/work/riscv/bin:/opt/sbt/bin:/opt/firtool/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     stdin_open: true
     tty: true
 
 volumes:
   chipyard-vol:
+  home-vol:

@@ -1,0 +1,702 @@
+cmake missing — installing via apt (also added to Dockerfile for next image rebuild)
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libicu74:arm64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 17539 files and directories currently installed.)
+Preparing to unpack .../0-libicu74_74.2-1ubuntu3.1_arm64.deb ...
+Unpacking libicu74:arm64 (74.2-1ubuntu3.1) ...
+Selecting previously unselected package libxml2:arm64.
+Preparing to unpack .../1-libxml2_2.9.14+dfsg-1.3ubuntu3.7_arm64.deb ...
+Unpacking libxml2:arm64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+Selecting previously unselected package libuv1t64:arm64.
+Preparing to unpack .../2-libuv1t64_1.48.0-1.1build1_arm64.deb ...
+Unpacking libuv1t64:arm64 (1.48.0-1.1build1) ...
+Selecting previously unselected package libarchive13t64:arm64.
+Preparing to unpack .../3-libarchive13t64_3.7.2-2ubuntu0.7_arm64.deb ...
+Unpacking libarchive13t64:arm64 (3.7.2-2ubuntu0.7) ...
+Selecting previously unselected package libjsoncpp25:arm64.
+Preparing to unpack .../4-libjsoncpp25_1.9.5-6build1_arm64.deb ...
+Unpacking libjsoncpp25:arm64 (1.9.5-6build1) ...
+Selecting previously unselected package librhash0:arm64.
+Preparing to unpack .../5-librhash0_1.4.3-3build1_arm64.deb ...
+Unpacking librhash0:arm64 (1.4.3-3build1) ...
+Selecting previously unselected package cmake-data.
+Preparing to unpack .../6-cmake-data_3.28.3-1build7_all.deb ...
+Unpacking cmake-data (3.28.3-1build7) ...
+Selecting previously unselected package cmake.
+Preparing to unpack .../7-cmake_3.28.3-1build7_arm64.deb ...
+Unpacking cmake (3.28.3-1build7) ...
+Setting up libuv1t64:arm64 (1.48.0-1.1build1) ...
+Setting up libjsoncpp25:arm64 (1.9.5-6build1) ...
+Setting up libicu74:arm64 (74.2-1ubuntu3.1) ...
+Setting up librhash0:arm64 (1.4.3-3build1) ...
+Setting up cmake-data (3.28.3-1build7) ...
+Setting up libxml2:arm64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+Setting up libarchive13t64:arm64 (3.7.2-2ubuntu0.7) ...
+Setting up cmake (3.28.3-1build7) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+
+########## espresso ##########
+Installing espresso to /work/riscv
+Make sure /work/riscv/bin is on your PATH before using Constellation
+CMake Warning (dev) at CMakeLists.txt:1 (project):
+  cmake_minimum_required() should be called prior to this top-level project()
+  call.  Please see the cmake-commands(7) manual for usage documentation of
+  both commands.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- The C compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /work/chipyard/generators/constellation/espresso/build
+[  6%] Building C object CMakeFiles/espresso.dir/espresso/cofactor.c.o
+[  9%] Building C object CMakeFiles/espresso.dir/espresso/cubestr.c.o
+[  6%] Building C object CMakeFiles/espresso.dir/espresso/compl.c.o
+[ 12%] Building C object CMakeFiles/espresso.dir/espresso/contain.c.o
+[ 16%] Building C object CMakeFiles/espresso.dir/espresso/cols.c.o
+[ 19%] Building C object CMakeFiles/espresso.dir/espresso/cvrmisc.c.o
+[ 22%] Building C object CMakeFiles/espresso.dir/espresso/cvrin.c.o
+[ 25%] Building C object CMakeFiles/espresso.dir/espresso/cvrm.c.o
+[ 29%] Building C object CMakeFiles/espresso.dir/espresso/cvrout.c.o
+[ 32%] Building C object CMakeFiles/espresso.dir/espresso/dominate.c.o
+[ 35%] Building C object CMakeFiles/espresso.dir/espresso/espresso.c.o
+[ 38%] Building C object CMakeFiles/espresso.dir/espresso/essen.c.o
+[ 41%] Building C object CMakeFiles/espresso.dir/espresso/expand.c.o
+[ 45%] Building C object CMakeFiles/espresso.dir/espresso/gasp.c.o
+[ 48%] Building C object CMakeFiles/espresso.dir/espresso/gimpel.c.o
+[ 51%] Building C object CMakeFiles/espresso.dir/espresso/globals.c.o
+[ 54%] Building C object CMakeFiles/espresso.dir/espresso/indep.c.o
+[ 58%] Building C object CMakeFiles/espresso.dir/espresso/irred.c.o
+[ 61%] Building C object CMakeFiles/espresso.dir/espresso/main.c.o
+[ 64%] Building C object CMakeFiles/espresso.dir/espresso/matrix.c.o
+[ 67%] Building C object CMakeFiles/espresso.dir/espresso/mincov.c.o
+[ 70%] Building C object CMakeFiles/espresso.dir/espresso/part.c.o
+[ 74%] Building C object CMakeFiles/espresso.dir/espresso/reduce.c.o
+[ 77%] Building C object CMakeFiles/espresso.dir/espresso/rows.c.o
+[ 80%] Building C object CMakeFiles/espresso.dir/espresso/set.c.o
+[ 83%] Building C object CMakeFiles/espresso.dir/espresso/setc.c.o
+[ 87%] Building C object CMakeFiles/espresso.dir/espresso/sminterf.c.o
+[ 90%] Building C object CMakeFiles/espresso.dir/espresso/solution.c.o
+[ 93%] Building C object CMakeFiles/espresso.dir/espresso/sparse.c.o
+[ 96%] Building C object CMakeFiles/espresso.dir/espresso/unate.c.o
+[100%] Linking C executable espresso
+[100%] Built target espresso
+Install the project...
+-- Install configuration: ""
+-- Installing: /work/riscv/bin/espresso
+Espresso has been installed to /work/riscv/bin/espresso
+
+########## libgloss ##########
+Cloning into '/work/chipyard/toolchains/libgloss'...
+Submodule path 'toolchains/libgloss': checked out '39234a16247ab1fa234821b251f1f1870c3de343'
+checking for riscv64-unknown-elf-gcc... riscv64-unknown-elf-gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... yes
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether riscv64-unknown-elf-gcc accepts -g... yes
+checking for riscv64-unknown-elf-gcc option to accept ISO C89... none needed
+checking for riscv64-unknown-elf-ar... riscv64-unknown-elf-ar
+checking for riscv64-unknown-elf-size... riscv64-unknown-elf-size
+checking whether multilib is enabled... yes
+configure: creating ./config.status
+config.status: creating Makefile
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o misc/traps.o ../misc/traps.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o misc/tls.o ../misc/tls.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o misc/main.o ../misc/main.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o misc/htif.o ../misc/htif.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/nanosleep.o ../sys/nanosleep.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/access.o ../sys/access.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/chdir.o ../sys/chdir.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/chmod.o ../sys/chmod.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/chown.o ../sys/chown.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/close.o ../sys/close.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/execve.o ../sys/execve.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/exit.o ../sys/exit.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/faccessat.o ../sys/faccessat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/fork.o ../sys/fork.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/fstat.o ../sys/fstat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/fstatat.o ../sys/fstatat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/getcwd.o ../sys/getcwd.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/ftime.o ../sys/ftime.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/getpid.o ../sys/getpid.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/gettimeofday.o ../sys/gettimeofday.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/isatty.o ../sys/isatty.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/link.o ../sys/link.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/kill.o ../sys/kill.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/lseek.o ../sys/lseek.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/lstat.o ../sys/lstat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/open.o ../sys/open.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/openat.o ../sys/openat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/read.o ../sys/read.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/sbrk.o ../sys/sbrk.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/stat.o ../sys/stat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/sysconf.o ../sys/sysconf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/times.o ../sys/times.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/unlink.o ../sys/unlink.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/utime.o ../sys/utime.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/wait.o ../sys/wait.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o sys/write.o ../sys/write.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/vxprintf.o ../libc/stdio/vxprintf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/printf.o ../libc/stdio/printf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/sprintf.o ../libc/stdio/sprintf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/puts.o ../libc/stdio/puts.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/snprintf.o ../libc/stdio/snprintf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -c -o libc/stdio/printbuf.o ../libc/stdio/printbuf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -D__ASSEMBLY__ -c -o misc/crt0.o ../misc/crt0.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -D__ASSEMBLY__ -c -o misc/crtmain.o ../misc/crtmain.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -D__ASSEMBLY__ -c -o misc/crtmain-argv.o ../misc/crtmain-argv.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany   -I ../include -D__ASSEMBLY__ -c -o misc/init.o ../misc/init.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/misc/traps.o ../misc/traps.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/misc/tls.o ../misc/tls.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/misc/main.o ../misc/main.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/misc/htif.o ../misc/htif.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/nanosleep.o ../sys/nanosleep.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/access.o ../sys/access.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/chdir.o ../sys/chdir.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/chmod.o ../sys/chmod.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/close.o ../sys/close.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/chown.o ../sys/chown.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/execve.o ../sys/execve.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/exit.o ../sys/exit.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/faccessat.o ../sys/faccessat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/fork.o ../sys/fork.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/fstat.o ../sys/fstat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/ftime.o ../sys/ftime.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/fstatat.o ../sys/fstatat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/getcwd.o ../sys/getcwd.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/getpid.o ../sys/getpid.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/gettimeofday.o ../sys/gettimeofday.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/isatty.o ../sys/isatty.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/kill.o ../sys/kill.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/link.o ../sys/link.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/lseek.o ../sys/lseek.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/lstat.o ../sys/lstat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/open.o ../sys/open.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/openat.o ../sys/openat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/read.o ../sys/read.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/sbrk.o ../sys/sbrk.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/stat.o ../sys/stat.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/sysconf.o ../sys/sysconf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/times.o ../sys/times.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/unlink.o ../sys/unlink.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/utime.o ../sys/utime.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/wait.o ../sys/wait.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/sys/write.o ../sys/write.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/libc/stdio/vxprintf.o ../libc/stdio/vxprintf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/libc/stdio/printf.o ../libc/stdio/printf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/libc/stdio/sprintf.o ../libc/stdio/sprintf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/libc/stdio/snprintf.o ../libc/stdio/snprintf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/libc/stdio/puts.o ../libc/stdio/puts.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -c -o rv32e/ilp32e/libc/stdio/printbuf.o ../libc/stdio/printbuf.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -D__ASSEMBLY__ -c -o rv32e/ilp32e/misc/crt0.o ../misc/crt0.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -D__ASSEMBLY__ -c -o rv32e/ilp32e/misc/crtmain.o ../misc/crtmain.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -D__ASSEMBLY__ -c -o rv32e/ilp32e/misc/crtmain-argv.o ../misc/crtmain-argv.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -D__ASSEMBLY__ -c -o rv32e/ilp32e/misc/init.o ../misc/init.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32ea -mabi=ilp32e  -I ../include -c -o rv32ea/ilp32e/misc/traps.o ../misc/traps.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32ea -mabi=ilp32e  -I ../include -c -o rv32ea/ilp32e/misc/tls.o ../misc/tls.c
+../misc/crt0.S: Assembler messages:
+../misc/crt0.S:25: Error: illegal operands `li x16,0'
+../misc/crt0.S:26: Error: illegal operands `li x17,0'
+../misc/crt0.S:27: Error: illegal operands `li x18,0'
+../misc/crt0.S:28: Error: illegal operands `li x19,0'
+../misc/crt0.S:29: Error: illegal operands `li x20,0'
+../misc/crt0.S:30: Error: illegal operands `li x21,0'
+../misc/crt0.S:31: Error: illegal operands `li x22,0'
+../misc/crt0.S:32: Error: illegal operands `li x23,0'
+../misc/crt0.S:33: Error: illegal operands `li x24,0'
+../misc/crt0.S:34: Error: illegal operands `li x25,0'
+../misc/crt0.S:35: Error: illegal operands `li x26,0'
+../misc/crt0.S:36: Error: illegal operands `li x27,0'
+../misc/crt0.S:37: Error: illegal operands `li x28,0'
+../misc/crt0.S:38: Error: illegal operands `li x29,0'
+../misc/crt0.S:39: Error: illegal operands `li x30,0'
+../misc/crt0.S:40: Error: illegal operands `li x31,0'
+../misc/crt0.S:43: Error: unrecognized opcode `csrs mstatus,t0', extension `zicsr' required
+../misc/crt0.S:94: Error: unrecognized opcode `csrr s0,mhartid', extension `zicsr' required
+../misc/crt0.S:108: Error: unrecognized opcode `csrw mtvec,t0', extension `zicsr' required
+../misc/crt0.S:140: Error: unrecognized opcode `csrw mscratch,sp', extension `zicsr' required
+../misc/crt0.S:145: Error: unrecognized opcode `csrr x1,mscratch', extension `zicsr' required
+../misc/crt0.S:160: Error: illegal operands `sw x16,16*4(sp)'
+../misc/crt0.S:161: Error: illegal operands `sw x17,17*4(sp)'
+../misc/crt0.S:162: Error: illegal operands `sw x18,18*4(sp)'
+../misc/crt0.S:163: Error: illegal operands `sw x19,19*4(sp)'
+../misc/crt0.S:164: Error: illegal operands `sw x20,20*4(sp)'
+../misc/crt0.S:165: Error: illegal operands `sw x21,21*4(sp)'
+../misc/crt0.S:166: Error: illegal operands `sw x22,22*4(sp)'
+../misc/crt0.S:167: Error: illegal operands `sw x23,23*4(sp)'
+../misc/crt0.S:168: Error: illegal operands `sw x24,24*4(sp)'
+../misc/crt0.S:169: Error: illegal operands `sw x25,25*4(sp)'
+../misc/crt0.S:170: Error: illegal operands `sw x26,26*4(sp)'
+../misc/crt0.S:171: Error: illegal operands `sw x27,27*4(sp)'
+../misc/crt0.S:172: Error: illegal operands `sw x28,28*4(sp)'
+../misc/crt0.S:173: Error: illegal operands `sw x29,29*4(sp)'
+../misc/crt0.S:174: Error: illegal operands `sw x30,30*4(sp)'
+../misc/crt0.S:175: Error: illegal operands `sw x31,31*4(sp)'
+../misc/crt0.S:178: Error: unrecognized opcode `csrr a0,mepc', extension `zicsr' required
+../misc/crt0.S:179: Error: unrecognized opcode `csrr a1,mcause', extension `zicsr' required
+../misc/crt0.S:180: Error: unrecognized opcode `csrr a2,mtval', extension `zicsr' required
+../misc/crt0.S:183: Error: unrecognized opcode `csrw mepc,a0', extension `zicsr' required
+../misc/crt0.S:187: Error: unrecognized opcode `csrs mstatus,t0', extension `zicsr' required
+../misc/crt0.S:203: Error: illegal operands `lw x16,16*4(sp)'
+../misc/crt0.S:204: Error: illegal operands `lw x17,17*4(sp)'
+../misc/crt0.S:205: Error: illegal operands `lw x18,18*4(sp)'
+../misc/crt0.S:206: Error: illegal operands `lw x19,19*4(sp)'
+../misc/crt0.S:207: Error: illegal operands `lw x20,20*4(sp)'
+../misc/crt0.S:208: Error: illegal operands `lw x21,21*4(sp)'
+../misc/crt0.S:209: Error: illegal operands `lw x22,22*4(sp)'
+../misc/crt0.S:210: Error: illegal operands `lw x23,23*4(sp)'
+../misc/crt0.S:211: Error: illegal operands `lw x24,24*4(sp)'
+../misc/crt0.S:212: Error: illegal operands `lw x25,25*4(sp)'
+../misc/crt0.S:213: Error: illegal operands `lw x26,26*4(sp)'
+../misc/crt0.S:214: Error: illegal operands `lw x27,27*4(sp)'
+../misc/crt0.S:215: Error: illegal operands `lw x28,28*4(sp)'
+../misc/crt0.S:216: Error: illegal operands `lw x29,29*4(sp)'
+../misc/crt0.S:217: Error: illegal operands `lw x30,30*4(sp)'
+../misc/crt0.S:218: Error: illegal operands `lw x31,31*4(sp)'
+make: *** [Makefile:137: rv32e/ilp32e/misc/crt0.o] Error 1
+make: *** Waiting for unfinished jobs....
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32ea -mabi=ilp32e  -I ../include -c -o rv32ea/ilp32e/misc/main.o ../misc/main.c
+riscv64-unknown-elf-ar rcs libgloss_htif.a misc/traps.o misc/tls.o misc/main.o misc/htif.o sys/nanosleep.o sys/access.o sys/chdir.o sys/chmod.o sys/chown.o sys/close.o sys/execve.o sys/exit.o sys/faccessat.o sys/fork.o sys/fstat.o sys/fstatat.o sys/ftime.o sys/getcwd.o sys/getpid.o sys/gettimeofday.o sys/isatty.o sys/kill.o sys/link.o sys/lseek.o sys/lstat.o sys/open.o sys/openat.o sys/read.o sys/sbrk.o sys/stat.o sys/sysconf.o sys/times.o sys/unlink.o sys/utime.o sys/wait.o sys/write.o libc/stdio/vxprintf.o libc/stdio/printf.o libc/stdio/sprintf.o libc/stdio/snprintf.o libc/stdio/puts.o libc/stdio/printbuf.o misc/crt0.o misc/crtmain.o misc/crtmain-argv.o misc/init.o
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32e -mabi=ilp32e  -I ../include -D__ASSEMBLY__ -c -o rv32e/ilp32e/misc/crt0.o ../misc/crt0.S
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32ea -mabi=ilp32e  -I ../include -c -o rv32ea/ilp32e/misc/htif.o ../misc/htif.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32ea -mabi=ilp32e  -I ../include -c -o rv32ea/ilp32e/sys/nanosleep.o ../sys/nanosleep.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32ea -mabi=ilp32e  -I ../include -c -o rv32ea/ilp32e/sys/access.o ../sys/access.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32ea -mabi=ilp32e  -I ../include -c -o rv32ea/ilp32e/sys/chdir.o ../sys/chdir.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32ea -mabi=ilp32e  -I ../include -c -o rv32ea/ilp32e/sys/chmod.o ../sys/chmod.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32ea -mabi=ilp32e  -I ../include -c -o rv32ea/ilp32e/sys/chown.o ../sys/chown.c
+riscv64-unknown-elf-gcc --specs=picolibc.specs -std=c11 -pedantic -Wall -fno-common -fno-builtin -mcmodel=medany -march=rv32ea -mabi=ilp32e  -I ../include -c -o rv32ea/ilp32e/sys/close.o ../sys/close.c
+../misc/crt0.S: Assembler messages:
+../misc/crt0.S:25: Error: illegal operands `li x16,0'
+../misc/crt0.S:26: Error: illegal operands `li x17,0'
+../misc/crt0.S:27: Error: illegal operands `li x18,0'
+../misc/crt0.S:28: Error: illegal operands `li x19,0'
+../misc/crt0.S:29: Error: illegal operands `li x20,0'
+../misc/crt0.S:30: Error: illegal operands `li x21,0'
+../misc/crt0.S:31: Error: illegal operands `li x22,0'
+../misc/crt0.S:32: Error: illegal operands `li x23,0'
+../misc/crt0.S:33: Error: illegal operands `li x24,0'
+../misc/crt0.S:34: Error: illegal operands `li x25,0'
+../misc/crt0.S:35: Error: illegal operands `li x26,0'
+../misc/crt0.S:36: Error: illegal operands `li x27,0'
+../misc/crt0.S:37: Error: illegal operands `li x28,0'
+../misc/crt0.S:38: Error: illegal operands `li x29,0'
+../misc/crt0.S:39: Error: illegal operands `li x30,0'
+../misc/crt0.S:40: Error: illegal operands `li x31,0'
+../misc/crt0.S:43: Error: unrecognized opcode `csrs mstatus,t0', extension `zicsr' required
+../misc/crt0.S:94: Error: unrecognized opcode `csrr s0,mhartid', extension `zicsr' required
+../misc/crt0.S:108: Error: unrecognized opcode `csrw mtvec,t0', extension `zicsr' required
+../misc/crt0.S:140: Error: unrecognized opcode `csrw mscratch,sp', extension `zicsr' required
+../misc/crt0.S:145: Error: unrecognized opcode `csrr x1,mscratch', extension `zicsr' required
+../misc/crt0.S:160: Error: illegal operands `sw x16,16*4(sp)'
+../misc/crt0.S:161: Error: illegal operands `sw x17,17*4(sp)'
+../misc/crt0.S:162: Error: illegal operands `sw x18,18*4(sp)'
+../misc/crt0.S:163: Error: illegal operands `sw x19,19*4(sp)'
+../misc/crt0.S:164: Error: illegal operands `sw x20,20*4(sp)'
+../misc/crt0.S:165: Error: illegal operands `sw x21,21*4(sp)'
+../misc/crt0.S:166: Error: illegal operands `sw x22,22*4(sp)'
+../misc/crt0.S:167: Error: illegal operands `sw x23,23*4(sp)'
+../misc/crt0.S:168: Error: illegal operands `sw x24,24*4(sp)'
+../misc/crt0.S:169: Error: illegal operands `sw x25,25*4(sp)'
+../misc/crt0.S:170: Error: illegal operands `sw x26,26*4(sp)'
+../misc/crt0.S:171: Error: illegal operands `sw x27,27*4(sp)'
+../misc/crt0.S:172: Error: illegal operands `sw x28,28*4(sp)'
+../misc/crt0.S:173: Error: illegal operands `sw x29,29*4(sp)'
+../misc/crt0.S:174: Error: illegal operands `sw x30,30*4(sp)'
+../misc/crt0.S:175: Error: illegal operands `sw x31,31*4(sp)'
+../misc/crt0.S:178: Error: unrecognized opcode `csrr a0,mepc', extension `zicsr' required
+../misc/crt0.S:179: Error: unrecognized opcode `csrr a1,mcause', extension `zicsr' required
+../misc/crt0.S:180: Error: unrecognized opcode `csrr a2,mtval', extension `zicsr' required
+../misc/crt0.S:183: Error: unrecognized opcode `csrw mepc,a0', extension `zicsr' required
+../misc/crt0.S:187: Error: unrecognized opcode `csrs mstatus,t0', extension `zicsr' required
+../misc/crt0.S:203: Error: illegal operands `lw x16,16*4(sp)'
+../misc/crt0.S:204: Error: illegal operands `lw x17,17*4(sp)'
+../misc/crt0.S:205: Error: illegal operands `lw x18,18*4(sp)'
+../misc/crt0.S:206: Error: illegal operands `lw x19,19*4(sp)'
+../misc/crt0.S:207: Error: illegal operands `lw x20,20*4(sp)'
+../misc/crt0.S:208: Error: illegal operands `lw x21,21*4(sp)'
+../misc/crt0.S:209: Error: illegal operands `lw x22,22*4(sp)'
+../misc/crt0.S:210: Error: illegal operands `lw x23,23*4(sp)'
+../misc/crt0.S:211: Error: illegal operands `lw x24,24*4(sp)'
+../misc/crt0.S:212: Error: illegal operands `lw x25,25*4(sp)'
+../misc/crt0.S:213: Error: illegal operands `lw x26,26*4(sp)'
+../misc/crt0.S:214: Error: illegal operands `lw x27,27*4(sp)'
+../misc/crt0.S:215: Error: illegal operands `lw x28,28*4(sp)'
+../misc/crt0.S:216: Error: illegal operands `lw x29,29*4(sp)'
+../misc/crt0.S:217: Error: illegal operands `lw x30,30*4(sp)'
+../misc/crt0.S:218: Error: illegal operands `lw x31,31*4(sp)'
+make: *** [Makefile:138: rv32e/ilp32e/misc/crt0.o] Error 1
+make: *** Waiting for unfinished jobs....
+
+########## riscv-pk ##########
+checking build system type... aarch64-unknown-linux-gnu
+checking host system type... riscv64-unknown-elf
+checking for riscv64-unknown-elf-gcc... riscv64-unknown-elf-gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... yes
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether riscv64-unknown-elf-gcc accepts -g... yes
+checking for riscv64-unknown-elf-gcc option to enable C11 features... none needed
+checking for riscv64-unknown-elf-g++... riscv64-unknown-elf-g++
+checking whether the compiler supports GNU C++... yes
+checking whether riscv64-unknown-elf-g++ accepts -g... yes
+checking for riscv64-unknown-elf-g++ option to enable C++11 features... none needed
+checking for riscv64-unknown-elf-ar... riscv64-unknown-elf-ar
+checking for riscv64-unknown-elf-ranlib... riscv64-unknown-elf-ranlib
+checking for riscv64-unknown-elf-readelf... riscv64-unknown-elf-readelf
+checking for riscv64-unknown-elf-objcopy... riscv64-unknown-elf-objcopy
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for __ashldi3 in -lgcc... no
+checking for __ashlti3 in -lgcc... no
+configure: configuring default subproject : pk
+configure: configuring default subproject : bbl
+configure: configuring default subproject : softfloat
+configure: configuring default subproject : dummy_payload
+configure: configuring default subproject : machine
+configure: configuring default subproject : util
+configure: creating ./config.status
+config.status: creating pk.mk
+config.status: creating bbl.mk
+config.status: creating softfloat.mk
+config.status: creating dummy_payload.mk
+config.status: creating machine.mk
+config.status: creating util.mk
+config.status: creating Makefile
+config.status: creating config.h
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/file.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/syscall.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/handlers.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/frontend.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/elf.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/console.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/mmap.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/usermem.c
+In file included from ../pk/file.c:3:
+../pk/file.h:6:10: fatal error: sys/stat.h: No such file or directory
+    6 | #include <sys/stat.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/entry.S
+In file included from ../pk/handlers.c:3:
+../pk/pk.h:10:10: fatal error: string.h: No such file or directory
+   10 | #include <string.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../bbl/logo.c
+In file included from ../pk/elf.c:3:
+../pk/pk.h:10:10: fatal error: string.h: No such file or directory
+   10 | #include <string.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+make: *** [Makefile:336: file.o] Error 1
+make: *** Waiting for unfinished jobs....
+In file included from ../pk/frontend.c:3:
+../pk/pk.h:10:10: fatal error: string.h: No such file or directory
+   10 | #include <string.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+make: *** [Makefile:336: handlers.o] Error 1
+make: *** [Makefile:336: elf.o] Error 1
+In file included from ../pk/syscall.c:4:
+../pk/pk.h:10:10: fatal error: string.h: No such file or directory
+   10 | #include <string.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+make: *** [Makefile:336: syscall.o] Error 1
+make: *** [Makefile:336: frontend.o] Error 1
+In file included from ../pk/console.c:3:
+../pk/pk.h:10:10: fatal error: string.h: No such file or directory
+   10 | #include <string.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+make: *** [Makefile:336: console.o] Error 1
+../bbl/logo.c:3:10: fatal error: string.h: No such file or directory
+    3 | #include <string.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+In file included from ../pk/mmap.h:9,
+                 from ../pk/mmap.c:3:
+../pk/file.h:6:10: fatal error: sys/stat.h: No such file or directory
+    6 | #include <sys/stat.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+make: *** [Makefile:336: logo.o] Error 1
+make: *** [Makefile:336: mmap.o] Error 1
+In file included from ../pk/mmap.h:9,
+                 from ../pk/usermem.c:4:
+../pk/file.h:6:10: fatal error: sys/stat.h: No such file or directory
+    6 | #include <sys/stat.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+make: *** [Makefile:336: usermem.o] Error 1
+../scripts/mk-install-dirs.sh //work/riscv/riscv64-unknown-elf/include/riscv-pk
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/file.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/syscall.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/handlers.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/frontend.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/elf.c
+mkdir //work/riscv/riscv64-unknown-elf
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/console.c
+riscv64-unknown-elf-gcc -MMD -MP -Wall -Werror -D__NO_INLINE__ -mcmodel=medany -O2 -std=gnu99 -Wno-unused -Wno-attributes -fno-delete-null-pointer-checks -fno-PIE  -march=rv64gc_zifencei -mabi=lp64 -DBBL_LOGO_FILE=\"bbl_logo_file\" -DMEM_START=0x80000000 -fno-stack-protector -U_FORTIFY_SOURCE -DBBL_PAYLOAD=\"bbl_payload\" -I. -I../pk -I../bbl -I../softfloat -I../dummy_payload -I../machine -I../util -c ../pk/mmap.c
+mkdir //work/riscv/riscv64-unknown-elf/include
+mkdir //work/riscv/riscv64-unknown-elf/include/riscv-pk
+for file in ../pk/boot.h ../pk/elf.h ../pk/file.h ../pk/frontend.h ../pk/mmap.h ../pk/pk.h ../pk/syscall.h ../pk/usermem.h ../bbl/bbl.h ../softfloat/internals.h ../softfloat/opts-GCC.h ../softfloat/platform.h ../softfloat/primitives.h ../softfloat/primitiveTypes.h ../softfloat/softfloat.h ../softfloat/softfloat_types.h ../softfloat/specialize.h  ../machine/atomic.h ../machine/bits.h ../machine/fdt.h ../machine/emulation.h ../machine/encoding.h ../machine/fp_emulation.h ../machine/htif.h ../machine/mcall.h ../machine/mtrap.h ../machine/uart.h ../machine/uart16550.h ../machine/uart_litex.h ../machine/finisher.h ../machine/unprivileged_memory.h ../machine/vm.h ; \
+  do \
+    /usr/bin/install -c -m 644 $file //work/riscv/riscv64-unknown-elf/include/riscv-pk; \
+  done
+In file included from ../pk/file.c:3:
+../pk/file.h:6:10: fatal error: sys/stat.h: No such file or directory
+    6 | #include <sys/stat.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+In file included from ../pk/syscall.c:4:
+../pk/pk.h:10:10: fatal error: string.h: No such file or directory
+   10 | #include <string.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+In file included from ../pk/frontend.c:3:
+../pk/pk.h:10:10: fatal error: string.h: No such file or directory
+   10 | #include <string.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+In file included from ../pk/handlers.c:3:
+../pk/pk.h:10:10: fatal error: string.h: No such file or directory
+   10 | #include <string.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+In file included from ../pk/console.c:3:
+../pk/pk.h:10:10: fatal error: string.h: No such file or directory
+   10 | #include <string.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+make: *** [Makefile:336: file.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Makefile:336: syscall.o] Error 1
+make: *** [Makefile:336: handlers.o] Error 1
+make: *** [Makefile:336: frontend.o] Error 1
+make: *** [Makefile:336: console.o] Error 1
+In file included from ../pk/elf.c:3:
+../pk/pk.h:10:10: fatal error: string.h: No such file or directory
+   10 | #include <string.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+In file included from ../pk/mmap.h:9,
+                 from ../pk/mmap.c:3:
+../pk/file.h:6:10: fatal error: sys/stat.h: No such file or directory
+    6 | #include <sys/stat.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+make: *** [Makefile:336: elf.o] Error 1
+make: *** [Makefile:336: mmap.o] Error 1
+
+########## riscv-tests ##########
+Cloning into '/work/chipyard/toolchains/riscv-tools/riscv-tests'...
+Submodule path 'toolchains/riscv-tools/riscv-tests': checked out '51de00886cd28a3cf9b85ee306fb2b5ee5ab550e'
+Submodule 'env' (https://github.com/riscv/riscv-test-env.git) registered for path 'toolchains/riscv-tools/riscv-tests/env'
+Cloning into '/work/chipyard/toolchains/riscv-tools/riscv-tests/env'...
+Submodule path 'toolchains/riscv-tools/riscv-tests/env': checked out '4fabfb4e0d3eacc1dc791da70e342e4b68ea7e46'
+checking for gcc... gcc
+configure: WARNING: using cross tools not prefixed with host triplet
+checking whether the C compiler works... no
+configure: error: in `/work/chipyard/toolchains/riscv-tools/riscv-tests/build':
+configure: error: C compiler cannot create executables
+See `config.log' for more details
+make: *** No targets specified and no makefile found.  Stop.
+make: *** No rule to make target 'install'.  Stop.
+
+########## DRAMSim2 ##########
+rm -f AddressMapping.o Bank.o BankState.o BusPacket.o ClockDomain.o CommandQueue.o IniReader.o MemoryController.o MemorySystem.o MultiChannelMemorySystem.o PrintMacros.o Rank.o SimulatorObject.o TraceBasedSim.o Transaction.o AddressMapping.po Bank.po BankState.po BusPacket.po ClockDomain.po CommandQueue.po IniReader.po MemoryController.po MemorySystem.po MultiChannelMemorySystem.po PrintMacros.po Rank.po SimulatorObject.po Transaction.po DRAMSim libdramsim.so libdramsim.a *.dep *.deppo
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o AddressMapping.po -c AddressMapping.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o Bank.po -c Bank.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o BankState.po -c BankState.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o BusPacket.po -c BusPacket.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o ClockDomain.po -c ClockDomain.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o CommandQueue.po -c CommandQueue.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o IniReader.po -c IniReader.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o MemoryController.po -c MemoryController.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o MemorySystem.po -c MemorySystem.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o MultiChannelMemorySystem.po -c MultiChannelMemorySystem.cpp
+BusPacket.cpp: In member function ‘void DRAMSim::BusPacket::print(uint64_t, bool)’:
+BusPacket.cpp:63:9: warning: ‘nonnull’ argument ‘this’ compared to NULL [-Wnonnull-compare]
+   63 |         if (this == NULL)
+      |         ^~
+BusPacket.cpp: In member function ‘void DRAMSim::BusPacket::print()’:
+BusPacket.cpp:104:9: warning: ‘nonnull’ argument ‘this’ compared to NULL [-Wnonnull-compare]
+  104 |         if (this == NULL) //pointer use makes this a necessary precaution
+      |         ^~
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o PrintMacros.po -c PrintMacros.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o Rank.po -c Rank.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o SimulatorObject.po -c SimulatorObject.cpp
+g++ -DNO_STORAGE -Wall -DDEBUG_BUILD  -O3  -fPIC -o Transaction.po -c Transaction.cpp
+g++ -g -shared -Wl,-soname,libdramsim.so -o libdramsim.so AddressMapping.po Bank.po BankState.po BusPacket.po ClockDomain.po CommandQueue.po IniReader.po MemoryController.po MemorySystem.po MultiChannelMemorySystem.po PrintMacros.po Rank.po SimulatorObject.po Transaction.po
+Built libdramsim.so successfully
+
+########## uart_tsi ##########
+g++ -O3 -L /work/riscv/lib -I ../src/main/resources/testchipip/csrc -I /work/riscv/include -std=c++17 -o uart_tsi testchip_uart_tsi.cc ../src/main/resources/testchipip/csrc/testchip_tsi.cc ../src/main/resources/testchipip/csrc/testchip_htif.cc -lfesvr -lpthread
+
+########## spike-devices ##########
+Cloning into '/work/chipyard/toolchains/riscv-tools/riscv-spike-devices'...
+Submodule path 'toolchains/riscv-tools/riscv-spike-devices': checked out '67e123c1ca09533b0cde9b2cfc7b8a1f36155c46'
+Running with RISCV=/work/riscv
+g++ -L /work/riscv/lib -Wl,-rpath,/work/riscv/lib -shared -o libspikedevices.so -std=c++17 -I /work/riscv/include -fPIC src/iceblk.cc src/sifive_uart.cc
+In file included from /work/riscv/include/riscv/trap.h:7,
+                 from /work/riscv/include/riscv/mmu.h:7,
+                 from src/iceblk.h:11,
+                 from src/iceblk.cc:9:
+/work/riscv/include/riscv/encoding.h:3022:9: warning: ISO C++11 requires whitespace after the macro name
+ 3022 | #define INSN_FIELD_RS2=RS1 0x1f00000
+      |         ^~~~~~~~~~~~~~
+/work/riscv/include/riscv/encoding.h:3022: warning: "INSN_FIELD_RS2" redefined
+ 3022 | #define INSN_FIELD_RS2=RS1 0x1f00000
+      | 
+/work/riscv/include/riscv/encoding.h:2919: note: this is the location of the previous definition
+ 2919 | #define INSN_FIELD_RS2 0x1f00000
+      | 
+/work/riscv/include/riscv/mmu.h:42:30: warning: default member initializers for bit-fields only available with ‘-std=c++20’ or ‘-std=gnu++20’ [-Wc++20-extensions]
+   42 |   const bool forced_virt : 1 {false};
+      |                              ^
+/work/riscv/include/riscv/mmu.h:43:23: warning: default member initializers for bit-fields only available with ‘-std=c++20’ or ‘-std=gnu++20’ [-Wc++20-extensions]
+   43 |   const bool hlvx : 1 {false};
+      |                       ^
+/work/riscv/include/riscv/mmu.h:44:21: warning: default member initializers for bit-fields only available with ‘-std=c++20’ or ‘-std=gnu++20’ [-Wc++20-extensions]
+   44 |   const bool lr : 1 {false};
+      |                     ^
+/work/riscv/include/riscv/mmu.h:45:28: warning: default member initializers for bit-fields only available with ‘-std=c++20’ or ‘-std=gnu++20’ [-Wc++20-extensions]
+   45 |   const bool ss_access : 1 {false};
+      |                            ^
+In file included from /work/riscv/include/riscv/sim.h:9,
+                 from src/iceblk.h:14:
+/work/riscv/include/riscv/log_file.h:34:42: warning: ignoring attributes on template argument ‘int (*)(FILE*)’ [-Wignored-attributes]
+   34 |   std::unique_ptr<FILE, decltype(&fclose)> wrapped_file;
+      |                                          ^
+src/iceblk.cc: In constructor ‘iceblk_t::iceblk_t(const simif_t*, abstract_interrupt_controller_t*, uint32_t, std::vector<std::__cxx11::basic_string<char> >)’:
+src/iceblk.cc:62:35: warning: format ‘%s’ expects argument of type ‘char*’, but argument 2 has type ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} [-Wformat=]
+   62 |       printf("Error opening file %s\n", img_path);
+      |                                  ~^
+      |                                   |
+      |                                   char*
+In file included from /work/riscv/include/riscv/trap.h:7,
+                 from /work/riscv/include/riscv/processor.h:6,
+                 from /work/riscv/include/riscv/dts.h:6,
+                 from src/sifive_uart.h:5,
+                 from src/sifive_uart.cc:1:
+/work/riscv/include/riscv/encoding.h:3022:9: warning: ISO C++11 requires whitespace after the macro name
+ 3022 | #define INSN_FIELD_RS2=RS1 0x1f00000
+      |         ^~~~~~~~~~~~~~
+/work/riscv/include/riscv/encoding.h:3022: warning: "INSN_FIELD_RS2" redefined
+ 3022 | #define INSN_FIELD_RS2=RS1 0x1f00000
+      | 
+/work/riscv/include/riscv/encoding.h:2919: note: this is the location of the previous definition
+ 2919 | #define INSN_FIELD_RS2 0x1f00000
+      | 
+In file included from /work/riscv/include/riscv/sim.h:9,
+                 from src/sifive_uart.h:6:
+/work/riscv/include/riscv/log_file.h:34:42: warning: ignoring attributes on template argument ‘int (*)(FILE*)’ [-Wignored-attributes]
+   34 |   std::unique_ptr<FILE, decltype(&fclose)> wrapped_file;
+      |                                          ^
+cp libspikedevices.so /work/riscv/lib
+
+########## libgemmini ##########
+Submodule 'software/libgemmini' (https://github.com/ucb-bar/libgemmini.git) registered for path 'software/libgemmini'
+Cloning into '/work/chipyard/generators/gemmini/software/libgemmini'...
+Submodule path 'software/libgemmini': checked out '2b0f1cf61f9ffaa6fe3efdb58e56c31954b93d36'
+make: Entering directory '/work/chipyard/generators/gemmini/software/libgemmini'
+Running with RISCV=/work/riscv
+g++ -L /work/riscv/lib -Wl,-rpath,/work/riscv/lib -shared -o libgemmini.so -std=c++17 -I /work/riscv/include -fPIC -O3 gemmini.cc
+In file included from /work/riscv/include/riscv/trap.h:7,
+                 from /work/riscv/include/riscv/processor.h:6,
+                 from /work/riscv/include/riscv/extension.h:6,
+                 from gemmini.h:4,
+                 from gemmini.cc:1:
+/work/riscv/include/riscv/encoding.h:3022:9: warning: ISO C++11 requires whitespace after the macro name
+ 3022 | #define INSN_FIELD_RS2=RS1 0x1f00000
+      |         ^~~~~~~~~~~~~~
+/work/riscv/include/riscv/encoding.h:3022: warning: "INSN_FIELD_RS2" redefined
+ 3022 | #define INSN_FIELD_RS2=RS1 0x1f00000
+      | 
+/work/riscv/include/riscv/encoding.h:2919: note: this is the location of the previous definition
+ 2919 | #define INSN_FIELD_RS2 0x1f00000
+      | 
+In file included from gemmini.cc:2:
+/work/riscv/include/riscv/mmu.h:42:30: warning: default member initializers for bit-fields only available with ‘-std=c++20’ or ‘-std=gnu++20’ [-Wc++20-extensions]
+   42 |   const bool forced_virt : 1 {false};
+      |                              ^
+/work/riscv/include/riscv/mmu.h:43:23: warning: default member initializers for bit-fields only available with ‘-std=c++20’ or ‘-std=gnu++20’ [-Wc++20-extensions]
+   43 |   const bool hlvx : 1 {false};
+      |                       ^
+/work/riscv/include/riscv/mmu.h:44:21: warning: default member initializers for bit-fields only available with ‘-std=c++20’ or ‘-std=gnu++20’ [-Wc++20-extensions]
+   44 |   const bool lr : 1 {false};
+      |                     ^
+/work/riscv/include/riscv/mmu.h:45:28: warning: default member initializers for bit-fields only available with ‘-std=c++20’ or ‘-std=gnu++20’ [-Wc++20-extensions]
+   45 |   const bool ss_access : 1 {false};
+      |                            ^
+gemmini.cc: In member function ‘void gemmini_t::config(reg_t, reg_t)’:
+gemmini.cc:440:13: warning: format ‘%lu’ expects argument of type ‘long unsigned int’, but argument 2 has type ‘double’ [-Wformat=]
+  440 |     dprintf("GEMMINI: config_mvin - set load scale from %lu to %lu\n", gemmini_state.load_scales[state_id], scale_t_bits_to_scale_t(rs1 >> 32));
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                          |
+      |                                                                                                          double
+gemmini.cc:13:65: note: in definition of macro ‘dprintf’
+   13 | #define dprintf(...) { if (p->get_log_commits_enabled()) printf(__VA_ARGS__); }
+      |                                                                 ^~~~~~~~~~~
+gemmini.cc:440:59: note: format string is defined here
+  440 |     dprintf("GEMMINI: config_mvin - set load scale from %lu to %lu\n", gemmini_state.load_scales[state_id], scale_t_bits_to_scale_t(rs1 >> 32));
+      |                                                         ~~^
+      |                                                           |
+      |                                                           long unsigned int
+      |                                                         %f
+gemmini.cc:440:13: warning: format ‘%lu’ expects argument of type ‘long unsigned int’, but argument 3 has type ‘double’ [-Wformat=]
+  440 |     dprintf("GEMMINI: config_mvin - set load scale from %lu to %lu\n", gemmini_state.load_scales[state_id], scale_t_bits_to_scale_t(rs1 >> 32));
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                                    |
+      |                                                                                                                                    double
+gemmini.cc:13:65: note: in definition of macro ‘dprintf’
+   13 | #define dprintf(...) { if (p->get_log_commits_enabled()) printf(__VA_ARGS__); }
+      |                                                                 ^~~~~~~~~~~
+gemmini.cc:440:66: note: format string is defined here
+  440 |     dprintf("GEMMINI: config_mvin - set load scale from %lu to %lu\n", gemmini_state.load_scales[state_id], scale_t_bits_to_scale_t(rs1 >> 32));
+      |                                                                ~~^
+      |                                                                  |
+      |                                                                  long unsigned int
+      |                                                                %f
+gemmini.cc:500:17: warning: format ‘%llx’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘reg_t’ {aka ‘long unsigned int’} [-Wformat=]
+  500 |         dprintf("GEMMINI: config_mvout - rs1 is %llx\n", rs1);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~
+      |                                                          |
+      |                                                          reg_t {aka long unsigned int}
+gemmini.cc:13:65: note: in definition of macro ‘dprintf’
+   13 | #define dprintf(...) { if (p->get_log_commits_enabled()) printf(__VA_ARGS__); }
+      |                                                                 ^~~~~~~~~~~
+gemmini.cc:500:52: note: format string is defined here
+  500 |         dprintf("GEMMINI: config_mvout - rs1 is %llx\n", rs1);
+      |                                                 ~~~^
+      |                                                    |
+      |                                                    long long unsigned int
+      |                                                 %lx
+cp libgemmini.so /work/riscv/lib
+make: Leaving directory '/work/chipyard/generators/gemmini/software/libgemmini'
+
+================ SUMMARY ================
+PASS: espresso DRAMSim2 uart_tsi spike-devices libgemmini
+FAIL: libgloss (REQUIRED) riscv-pk (optional) riscv-tests (optional)
+REQUIRED component failed — P0 blocked, dán log cho Claude.

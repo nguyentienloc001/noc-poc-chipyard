@@ -1,0 +1,4 @@
+date: 2026-06-11T06:13:28+07:00
+config: RocketConfig
+binary: /work/smoke/zeroload_latency.riscv
+chipyard_commit: 69eba860a352343e4ac6b6df0f3638a79a86ec78

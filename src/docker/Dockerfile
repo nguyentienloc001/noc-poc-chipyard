@@ -23,21 +23,19 @@ ARG SBT_VERSION=1.10.7
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl \
     && rm -rf /var/lib/apt/lists/*
 
-# firtool (CIRCT) — không có gói apt
+# firtool (CIRCT) — không có gói apt.
+# arm64: NO aarch64 prebuilt exists (checked firtool-1.75.0 release assets AND
+# org.chipsalliance:llvm-firtool maven jar — P0 actual.md 2026-06-11). Ship the
+# linux-x64 binary instead and run it via binfmt_misc (qemu/Rosetta — available
+# out of the box on Docker Desktop). Identical binary on both arches => identical
+# Verilog output => reproducible across machines. Cost: slower elaboration on arm64.
+# Requires amd64 multiarch libc in the runtime stage (see below).
 RUN set -eu; \
-    case "${TARGETARCH}" in \
-      amd64) FT_ARCH=linux-x64 ;; \
-      arm64) FT_ARCH=linux-aarch64 ;; \
-      *) echo "Unsupported arch ${TARGETARCH}"; exit 1 ;; \
-    esac; \
+    FT_ARCH=linux-x64; \
     mkdir -p /opt/firtool; \
-    if curl -fL "https://github.com/llvm/circt/releases/download/firtool-${FIRTOOL_VERSION}/firrtl-bin-${FT_ARCH}.tar.gz" \
-         -o /tmp/firtool.tar.gz; then \
-      tar -xzf /tmp/firtool.tar.gz -C /opt/firtool --strip-components=1; \
-    else \
-      echo "WARNING: no prebuilt firtool for ${FT_ARCH}." \
-           "Fallback (P0): chisel firtool-resolver tự tải, hoặc build CIRCT từ source — ghi vào actual.md"; \
-    fi
+    curl -fL "https://github.com/llvm/circt/releases/download/firtool-${FIRTOOL_VERSION}/firrtl-bin-${FT_ARCH}.tar.gz" \
+         -o /tmp/firtool.tar.gz; \
+    tar -xzf /tmp/firtool.tar.gz -C /opt/firtool --strip-components=1
 
 # sbt — tgz chính thức thay vì apt repo: image cuối không cần gnupg + keyring + sources.list phụ
 RUN mkdir -p /opt/sbt \
@@ -53,10 +51,12 @@ ENV TZ=Asia/Ho_Chi_Minh LANG=C.UTF-8 \
 # Mọi thứ có gói apt (apt-first), một layer duy nhất, dọn cache ngay
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # core build
-    build-essential git make autoconf ca-certificates curl jq sudo \
+    build-essential git make autoconf cmake ca-certificates curl jq sudo \
     python3 python3-pip \
-    # JVM for chisel/sbt elaboration
-    default-jdk-headless \
+    # JVM for chisel/sbt elaboration — JDK 17 LTS, NOT default-jdk (= 21 on noble):
+    # chipyard 1.13's sbt 1.8.2 (scala 2.12.17 parser) cannot read JDK 21
+    # classfiles -> "errorBadIndex/SbtParser NoClassDefFound" (P0 actual.md 2026-06-11)
+    openjdk-17-jdk-headless \
     # HW tools
     verilator \
     device-tree-compiler \
@@ -69,6 +69,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Prebuilt binaries từ fetcher — chỉ artifact cuối, không kèm tarball/cache
 COPY --from=fetcher /opt/firtool /opt/firtool
 COPY --from=fetcher /opt/sbt /opt/sbt
+
+# arm64 only: amd64 libc/libstdc++ so the x64 firtool runs via binfmt_misc
+# (qemu/Rosetta). Default DEB822 sources must be pinned to arm64 first, else
+# apt tries amd64 on ports.ubuntu.com -> 404. ~40MB, arm64 image only.
+ARG TARGETARCH
+RUN if [ "${TARGETARCH}" = "arm64" ]; then \
+      sed -i 's|^URIs:|Architectures: arm64\nURIs:|' /etc/apt/sources.list.d/ubuntu.sources \
+      && dpkg --add-architecture amd64 \
+      && printf 'deb [arch=amd64] http://archive.ubuntu.com/ubuntu noble main universe\ndeb [arch=amd64] http://archive.ubuntu.com/ubuntu noble-updates main universe\n' \
+         > /etc/apt/sources.list.d/amd64.list \
+      && apt-get update \
+      && apt-get install -y --no-install-recommends libc6:amd64 libstdc++6:amd64 zlib1g:amd64 \
+      && rm -rf /var/lib/apt/lists/*; \
+    fi
 
 # Non-root user (ubuntu:24.04 có sẵn user 'ubuntu' — thay bằng 'dev')
 RUN (userdel -r ubuntu 2>/dev/null || true) \
