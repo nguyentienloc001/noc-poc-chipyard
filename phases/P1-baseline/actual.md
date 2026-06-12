@@ -85,3 +85,10 @@
 - **Số quý từ lần fail**: bootstrap chipyard + build sim Baseline2 trên CI runner = **~14 phút** (so 25m của P0 verify; runner nhanh).
 - Fix: workflow thêm `set -o pipefail` + chmod `results results/raw src/benchmarks`; script thêm `git safe.directory /project` (meta ghi đúng project_commit) + **hard assert mỗi run phải có dòng CSV** (job xanh không data = tệ hơn job đỏ).
 - Re-dispatch pilot.
+
+## [2026-06-13 ~00:00] Claude Code — pilot v2 THÀNH CÔNG: data point chính thức ĐẦU TIÊN
+
+- Run 27416365222 success sau **3h58'** (bootstrap+build 14', sim ~75'/run × 3): **B1/Baseline2 = 53.4137 cycles/load** (median 3 runs, spread 0.00% — E3 đúng, Verilator deterministic; instret 300005 chuẩn). Meta đủ provenance (image_digest pinned, binary sha256, chipyard+project commit). Row KHÔNG flag trong summary.csv — data point chính thức đầu tiên của luận văn. Raw: `results/raw/ci-20260612-r27416365222-...`
+- Sim speed CI runner ≈ **11–12 kHz** (~3× M1). Ước job 3-runs: B1@2/4-core ~4h ✓ fit; combo 8-core (~2–3× chậm) sẽ vượt 6h/job → đã thêm `RUN_OFFSET` vào run_sim.sh + p1-ci-measure.sh + workflow (tách 3 runs thành 3 jobs song song n_runs=1, run_idx phân biệt — không bị parser dedup).
+- Fix nhỏ provenance: `-dirty` trong meta do file untracked → `--untracked-files=no`.
+- changes.md: official B2/B3 dùng `-DITERS=1` (spec không pin ITERS; giữ measured region trong khoảng 10^5–10^7 cycles của docs/03; cùng giá trị cho mọi config kể cả NoC P2).

@@ -12,6 +12,7 @@ set -euo pipefail
 CONFIG="${CONFIG:?}"; BENCH="${BENCH:?}"; TAG="${TAG:?}"
 NCORES="${NCORES:-2}"; MARCH="${MARCH:-rv64gc}"; MABI="${MABI:-lp64d}"
 DEFS="${DEFS:-}"; N_RUNS="${N_RUNS:-3}"; TIMEOUT_CYCLES="${TIMEOUT_CYCLES:-200000000}"
+RUN_OFFSET="${RUN_OFFSET:-0}"
 
 export RISCV="${RISCV:-/work/riscv}"
 export PATH="$RISCV/bin:$PATH"
@@ -56,8 +57,8 @@ echo "== build benchmark $BENCH (NCORES=$NCORES MARCH=$MARCH MABI=$MABI DEFS=$DE
 make -C /project/src/benchmarks "build/$BENCH.riscv" \
   NCORES="$NCORES" MARCH="$MARCH" MABI="$MABI" DEFS="$DEFS"
 
-echo "== measure: $N_RUNS runs"
-export CHIPYARD_DIR="$CYDIR" N_RUNS TIMEOUT_CYCLES
+echo "== measure: $N_RUNS runs (offset $RUN_OFFSET)"
+export CHIPYARD_DIR="$CYDIR" N_RUNS TIMEOUT_CYCLES RUN_OFFSET
 bash /project/src/scripts/run_sim.sh "$CONFIG" "/project/src/benchmarks/build/$BENCH.riscv" "$TAG"
 
 echo "== done; raw logs:"
@@ -66,6 +67,7 @@ ls -la "$OUT/"
 # Hard assertion: every run must have produced a CSV measurement line —
 # a green job without data is worse than a red one
 for i in $(seq 1 "$N_RUNS"); do
-  grep -q "CSV:" "$OUT/run${i}.log" || { echo "ERROR: no CSV line in run${i}.log"; exit 1; }
+  idx=$((RUN_OFFSET + i))
+  grep -q "CSV:" "$OUT/run${idx}.log" || { echo "ERROR: no CSV line in run${idx}.log"; exit 1; }
 done
 echo "== all $N_RUNS runs have CSV lines — MEASURE OK"

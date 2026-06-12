@@ -39,6 +39,10 @@ on:
         description: "timeout_cycles cho sim"
         required: true
         default: "200000000"
+      run_offset:
+        description: "RUN_OFFSET (combo nặng: tách 3 runs thành 3 jobs với offset 0/1/2, n_runs=1)"
+        required: false
+        default: "0"
 
 permissions:
   contents: read
@@ -84,6 +88,7 @@ jobs:
             -e DEFS="${{ inputs.defs }}" \
             -e N_RUNS="${{ inputs.n_runs }}" \
             -e TIMEOUT_CYCLES="${{ inputs.timeout_cycles }}" \
+            -e RUN_OFFSET="${{ inputs.run_offset }}" \
             -e TAG="$TAG" \
             "$IMAGE" \
             bash /project/src/scripts/p1-ci-measure.sh 2>&1 | tee measure-driver.log

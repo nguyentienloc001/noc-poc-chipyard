@@ -40,10 +40,14 @@ TIMEOUT_CYCLES="${TIMEOUT_CYCLES:-200000000}"
 LOADMEM="${LOADMEM:-1}"
 
 N_RUNS="${N_RUNS:-3}"
+# RUN_OFFSET: heavy combos (8-core, hours/run) split 3 official runs across
+# parallel CI jobs — run files get distinct indices so the parser keeps all 3
+RUN_OFFSET="${RUN_OFFSET:-0}"
 
 # Provenance for reproducibility (CLAUDE.md rules 1-2; fields per docs/04 §3)
 PROJECT_COMMIT="$(git -C "$PROJECT_DIR" rev-parse HEAD 2>/dev/null || echo unknown)"
-[[ -n "$(git -C "$PROJECT_DIR" status --porcelain 2>/dev/null)" ]] && PROJECT_COMMIT="${PROJECT_COMMIT}-dirty"
+# untracked files (fresh results/) are not "dirty" — only tracked modifications are
+[[ -n "$(git -C "$PROJECT_DIR" status --porcelain --untracked-files=no 2>/dev/null)" ]] && PROJECT_COMMIT="${PROJECT_COMMIT}-dirty"
 {
   echo "date: $(date -Iseconds)"
   echo "platform: verilator"
@@ -65,8 +69,9 @@ fi
 
 cd "$CHIPYARD_DIR/sims/verilator"
 for i in $(seq 1 "$N_RUNS"); do
-  echo ">> Run $i/$N_RUNS"
-  make CONFIG="$CONFIG" BINARY="$BINARY" LOADMEM="$LOADMEM" timeout_cycles="$TIMEOUT_CYCLES" run-binary 2>&1 | tee "$OUT_DIR/run${i}.log"
+  idx=$((RUN_OFFSET + i))
+  echo ">> Run $i/$N_RUNS (run_idx=$idx)"
+  make CONFIG="$CONFIG" BINARY="$BINARY" LOADMEM="$LOADMEM" timeout_cycles="$TIMEOUT_CYCLES" run-binary 2>&1 | tee "$OUT_DIR/run${idx}.log"
 done
 
 echo "Logs: $OUT_DIR"
