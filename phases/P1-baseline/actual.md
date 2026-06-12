@@ -78,3 +78,10 @@
 - So sánh smoke (params nhỏ, KHÔNG chính thức): aggregate 2-core 2.66 B/c → 4-core 3.77 B/c (+42% khi gấp đôi core); per-core 1.33 → 0.94 B/c → **sublinear scaling đúng expectations E5**. Đây là dấu hiệu tốt: thí nghiệm chính (RQ1) sẽ có tín hiệu rõ.
 - Multi-hart verified: 2-hart (spike+Verilator), 4-hart (Verilator). 8-hart sẽ verify khi đo Baseline8 (binary rv64imac).
 - Pilot CI (Baseline2 × B1 full × 3 runs) đang chạy — run 27384517360.
+
+## [2026-06-12 ~07:3x] Claude Code — pilot CI lần 1 fail (2 bug workflow), đã fix + re-dispatch
+
+- Pilot run 27384517360: job XANH GIẢ trong 14m48s — (a) `docker run | tee` nuốt exit code (đúng pattern tee-masking của P0); (b) script chết thật ở `mkdir build: Permission denied` (checkout uid 1001 vs container dev uid 1000 — chmod thiếu `src/benchmarks`). Artifact không có raw dir/CSV nào.
+- **Số quý từ lần fail**: bootstrap chipyard + build sim Baseline2 trên CI runner = **~14 phút** (so 25m của P0 verify; runner nhanh).
+- Fix: workflow thêm `set -o pipefail` + chmod `results results/raw src/benchmarks`; script thêm `git safe.directory /project` (meta ghi đúng project_commit) + **hard assert mỗi run phải có dòng CSV** (job xanh không data = tệ hơn job đỏ).
+- Re-dispatch pilot.

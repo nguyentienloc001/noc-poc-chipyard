@@ -62,8 +62,10 @@ jobs:
 
       - name: Measure inside pinned image
         run: |
+          set -o pipefail   # tee MUST NOT mask docker run's exit code (pilot 27384517360 lesson)
           mkdir -p "$RUNNER_TEMP/work" && chmod 0777 "$RUNNER_TEMP/work"
-          chmod -R a+rwX results || true
+          # container user dev (uid 1000) != runner uid: grant write where the job writes
+          chmod a+rwX results results/raw src/benchmarks
           TAG="ci-$(date +%Y%m%d)-r${{ github.run_id }}"
           echo "TAG=$TAG" >> "$GITHUB_ENV"
           docker run --rm \

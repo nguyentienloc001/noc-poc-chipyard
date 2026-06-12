@@ -21,6 +21,10 @@ CY_COMMIT=69eba860a352343e4ac6b6df0f3638a79a86ec78
 echo "== arch: $(uname -m) | config=$CONFIG bench=$BENCH ncores=$NCORES march=$MARCH n_runs=$N_RUNS"
 [ "$(uname -m)" = "x86_64" ] || echo "WARNING: not x86_64 — official runs expected on CI x86"
 
+# /project checkout is owned by the runner uid -> avoid git "dubious ownership"
+# so meta.txt records the real project commit
+git config --global --add safe.directory /project 2>/dev/null || true
+
 echo "== bootstrap chipyard @ $CY_COMMIT (procedure: src/docker/README.md)"
 git clone https://github.com/ucb-bar/chipyard.git "$CYDIR"
 cd "$CYDIR" && git checkout "$CY_COMMIT"
@@ -57,4 +61,11 @@ export CHIPYARD_DIR="$CYDIR" N_RUNS TIMEOUT_CYCLES
 bash /project/src/scripts/run_sim.sh "$CONFIG" "/project/src/benchmarks/build/$BENCH.riscv" "$TAG"
 
 echo "== done; raw logs:"
-ls -la "/project/results/raw/${TAG}-${CONFIG}-${BENCH}/"
+OUT="/project/results/raw/${TAG}-${CONFIG}-${BENCH}"
+ls -la "$OUT/"
+# Hard assertion: every run must have produced a CSV measurement line —
+# a green job without data is worse than a red one
+for i in $(seq 1 "$N_RUNS"); do
+  grep -q "CSV:" "$OUT/run${i}.log" || { echo "ERROR: no CSV line in run${i}.log"; exit 1; }
+done
+echo "== all $N_RUNS runs have CSV lines — MEASURE OK"
