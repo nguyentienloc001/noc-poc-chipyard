@@ -92,3 +92,16 @@
 - Sim speed CI runner ≈ **11–12 kHz** (~3× M1). Ước job 3-runs: B1@2/4-core ~4h ✓ fit; combo 8-core (~2–3× chậm) sẽ vượt 6h/job → đã thêm `RUN_OFFSET` vào run_sim.sh + p1-ci-measure.sh + workflow (tách 3 runs thành 3 jobs song song n_runs=1, run_idx phân biệt — không bị parser dedup).
 - Fix nhỏ provenance: `-dirty` trong meta do file untracked → `--untracked-files=no`.
 - changes.md: official B2/B3 dùng `-DITERS=1` (spec không pin ITERS; giữ measured region trong khoảng 10^5–10^7 cycles của docs/03; cùng giá trị cho mọi config kể cả NoC P2).
+
+## [2026-06-13 ~01:00] Claude Code — E1 Baseline2: 4/5 data point chính thức (B2 re-run)
+
+- Đợt dispatch Baseline2: 1 job stream_bw bị cancel do bug word-splitting (zsh không tách `"$3"` unquoted như bash — dispatch lại tường minh từng lệnh). 3 job kia (B3/B4/B5) PASS, cộng B1 pilot = 4/5 official.
+- **4 data point chính thức (N_RUNS=3, full provenance, KHÔNG flag)**:
+  - B1 zeroload: 53.41 c/load
+  - B3 contention_bw: 1.581 B/c aggregate (2 core, 8MB total)
+  - B4 loaded_latency: 56.27 c/load (= +5.4% vs B1 zero-load → 1 background loader đã làm latency tăng, đúng thiết kế)
+  - B5 core2core: 109.4 c/round-trip
+- B2 stream_bw đang chạy lại (run 27460560855).
+- **QUAN SÁT KHOA HỌC quan trọng (cho report + đề xuất với Loc)**: mọi data point spread = **0.00%** — Verilator fully deterministic (cùng binary + config → cycle count y hệt mọi run). Hệ quả: quy tắc "≥3 runs báo median" của CLAUDE.md/AGENTS rule 4 với Verilator chỉ là **reproducibility check** (xác nhận harness ổn định), KHÔNG đo được variance thật — variance thật chỉ xuất hiện ở FPGA (P3, có jitter tần số/DRAM refresh). → Đề xuất: Verilator có thể N_RUNS=1 (tiết kiệm 3× CI time) + giữ 1 run xác nhận; N_RUNS≥3 dành cho FPGA. CHƯA áp dụng — cần Loc quyết (đổi protocol phải ghi changes.md).
+- Fix workflow: artifact upload scope về `${TAG}-*` (trước đó kéo theo mọi dir ci-* đã commit → phình artifact).
+- docs/04: E1 tick B1/B3/B4/B5 ✅, B2 ⏳.

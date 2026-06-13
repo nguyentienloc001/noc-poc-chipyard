@@ -4,7 +4,7 @@
 
 | # | Config | B1 | B2 | B3 | B4 | B5 | B6 |
 |---|---|---|---|---|---|---|---|
-| E1 | Baseline2CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | — |
+| E1 | Baseline2CoreConfig | ✅ | ⏳ | ✅ | ✅ | ✅ | — |
 | E2 | Baseline4CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | — |
 | E3 | Baseline8CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | — |
 | E4 | NoCMesh2x2_4CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ |
@@ -49,3 +49,5 @@ Schema `results/csv/summary.csv` (sinh tự động từ results.csv, không s�
 |---|---|---|---|
 | 2026-06-11 | Pipeline smoke (P1 bước 7): B1–B5 trên Baseline2CoreConfig, param GIẢM, 1 run/bench | 69eba860 | KHÔNG phải data point chính thức (flag smoke trong summary.csv). 5/5 PASS: multi-hart verified trên RTL (B3 percore đủ 2 hart), B4 đo được +17.6% latency dưới tải, B5 106 c/RT. Log: `p1-step7-smoke-*` |
 | 2026-06-11 | Pipeline smoke (P0 bước 7): B1 zeroload_latency trên RocketConfig, param GIẢM (-DFOOTPRINT=2MB -DN_LOADS=20000), 1 run | 69eba860 | KHÔNG phải data point chính thức (config/param ngoài ma trận). Pipeline benchmark→sim→CSV verified; 52.6 cycles/load; row trong results.csv giữ làm bằng chứng smoke. LƯU Ý P1: chạy benchmark lớn cần LOADMEM=1 + TIMEOUT_CYCLES (đã default trong run_sim.sh); sửa idx[] 128KB stack trong zeroload trước khi đo thật |
+
+| 2026-06-13 | Đo chính thức E1 (Baseline2CoreConfig) trên CI x86, 4/5 bench (B1,B3,B4,B5; B2 đang chạy lại sau khi job đầu bị cancel), N_RUNS=3, full spec params (B3 ITERS=1 per changes.md) | 69eba860 | Tất cả spread 0.00% (Verilator deterministic). B1 53.4 c/load, B4 56.3 c/load (+5.4% dưới 1 background loader), B3 1.58 B/c agg 2-core, B5 109 c/RT. Image digest pinned. Raw: results/raw/ci-20260613-* |

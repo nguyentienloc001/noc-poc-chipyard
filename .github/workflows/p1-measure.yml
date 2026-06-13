@@ -98,6 +98,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: raw-${{ inputs.config }}-${{ inputs.bench }}-${{ github.run_id }}
+          # scope to THIS run's tag — else previously-committed ci-* dirs (checked
+          # out + mounted) get re-uploaded and bloat every artifact
           path: |
-            results/raw/ci-*
+            results/raw/${{ env.TAG }}-*
             measure-driver.log

@@ -1,0 +1,16 @@
+Running with RISCV=/work/riscv
+mkdir -p /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig
+if [ "/project/src/benchmarks/build/contention_bw.riscv" != "none" ] && [ ! -f "/project/src/benchmarks/build/contention_bw.riscv" ]; then printf "\n\nBinary /project/src/benchmarks/build/contention_bw.riscv not found\n\n"; exit 1; fi
+(set -o pipefail &&  /work/chipyard/sims/verilator/simulator-chipyard.harness-Baseline2CoreConfig \
+	+permissive \
+	+dramsim +dramsim_ini_dir=/work/chipyard/generators/testchipip/src/main/resources/dramsim2_ini +max-cycles=200000000   +loadmem=/project/src/benchmarks/build/contention_bw.riscv  \
+	+verbose \
+	+permissive-off \
+	/project/src/benchmarks/build/contention_bw.riscv \
+	 \
+	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/contention_bw.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline2CoreConfig/contention_bw.log)
+[UART] UART0 is here (stdin/stdout).
+CSV:contention_bw,2,8388608,5306049,1769541
+percore:0,5306049
+percore:1,5272975
+- /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.Baseline2CoreConfig/gen-collateral/TestDriver.v:158: Verilog $finish

@@ -9,3 +9,12 @@ date,platform,config,benchmark,n_active_cores,param,run_idx,cycles,instret,deriv
 2026-06-12,verilator,Baseline2CoreConfig,zeroload_latency,1,100000,1,5341373,300005,53.4137
 2026-06-12,verilator,Baseline2CoreConfig,zeroload_latency,1,100000,2,5341373,300005,53.4137
 2026-06-12,verilator,Baseline2CoreConfig,zeroload_latency,1,100000,3,5341373,300005,53.4137
+2026-06-13,verilator,Baseline2CoreConfig,core2core,2,1000,1,109399,0,109.399
+2026-06-13,verilator,Baseline2CoreConfig,core2core,2,1000,2,109399,0,109.399
+2026-06-13,verilator,Baseline2CoreConfig,core2core,2,1000,3,109399,0,109.399
+2026-06-13,verilator,Baseline2CoreConfig,loaded_latency,2,100000,1,5626687,300005,56.2669
+2026-06-13,verilator,Baseline2CoreConfig,loaded_latency,2,100000,2,5626687,300005,56.2669
+2026-06-13,verilator,Baseline2CoreConfig,loaded_latency,2,100000,3,5626687,300005,56.2669
+2026-06-13,verilator,Baseline2CoreConfig,contention_bw,2,8388608,1,5306049,1769541,1.58095
+2026-06-13,verilator,Baseline2CoreConfig,contention_bw,2,8388608,2,5306049,1769541,1.58095
+2026-06-13,verilator,Baseline2CoreConfig,contention_bw,2,8388608,3,5306049,1769541,1.58095
