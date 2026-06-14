@@ -9,7 +9,9 @@
 #include "perf.h"
 
 #ifndef BUF_WORDS
-#define BUF_WORDS (2 * 1024 * 1024 / 8)        // 2MB per array (docs/03 §3)
+#define BUF_WORDS (1 * 1024 * 1024 / 8)        // 1MB per array (docs/03 §3; 2MB
+                                               // was 350' CI timeout — changes.md
+                                               // 2026-06-14; 3MB ws still > L2)
 #endif
 #ifndef ITERS
 #define ITERS 4

@@ -32,9 +32,9 @@ on:
         required: false
         default: ""
       n_runs:
-        description: "Số runs (official >= 3)"
+        description: "Số runs (Verilator deterministic → 1 đủ; changes.md 2026-06-14)"
         required: true
-        default: "3"
+        default: "1"
       timeout_cycles:
         description: "timeout_cycles cho sim"
         required: true

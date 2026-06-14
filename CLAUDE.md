@@ -15,7 +15,7 @@ Project PoC luận văn thạc sĩ: chứng minh thực nghiệm NoC (Constellat
 1. **Không bịa số liệu.** Mọi con số performance phải đến từ lần chạy thực tế, có log trong `results/raw/`. Số ước lượng phải ghi rõ "ước lượng" kèm nguồn.
 2. **Mọi thí nghiệm phải tái lập được**: ghi rõ config name, commit hash của chipyard, tham số benchmark, seed.
 3. **So sánh công bằng**: baseline và NoC config chỉ khác nhau ở interconnect — cùng số core, cùng cache, cùng tần số (FPGA) hoặc cùng đơn vị cycle (Verilator).
-4. Mỗi data point chạy **tối thiểu 3 lần**, báo cáo median; nếu variance > 5% phải điều tra.
+4. **FPGA**: mỗi data point chạy **tối thiểu 3 lần**, báo cáo median; nếu variance > 5% phải điều tra. **Verilator** (deterministic — cùng binary+config cho cycle y hệt): N_RUNS=1 đủ, định kỳ chạy lẻ N_RUNS=2 xác nhận spread=0 (quyết định 2026-06-14, xem `phases/P1-baseline/changes.md`).
 5. Kết quả bất lợi cho NoC (vd. zero-load latency cao hơn crossbar) **vẫn phải báo cáo** — luận văn cần trung thực, trade-off là một phần của kết luận.
 
 ## Quy ước kỹ thuật

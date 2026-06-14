@@ -40,8 +40,8 @@ Dùng traffic injection framework có sẵn của Constellation (uniform random,
 | Tham số | Giá trị | Ghi chú |
 |---|---|---|
 | Footprint pointer-chase | 4 MB | > L2 512KB, ép ra DRAM |
-| STREAM buffer/core | 2 MB | |
-| Số lần lặp đo | ≥ 3 runs, báo median | variance > 5% → điều tra |
+| STREAM buffer/core | B2: 1 MB/array (3 arrays = 3MB ws); B3: 2 MB/core | cả hai > L2 512KB → DRAM-bound. B2 giảm từ 2MB do CI timeout (changes.md 2026-06-14) |
+| Số lần lặp đo | Verilator: N_RUNS=1 (deterministic, spread=0); FPGA: ≥3 runs báo median | Verilator cùng binary+config → cycle y hệt; variance thật chỉ ở FPGA (changes.md 2026-06-14). variance > 5% (FPGA) → điều tra |
 | Cycle đo mỗi run | 10⁵–10⁷ | đủ ngắn cho Verilator |
 | Compiler | riscv64-unknown-elf-gcc -O2 -march=rv64gc (big) / rv64imac (small) | |
 
