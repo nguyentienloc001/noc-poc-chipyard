@@ -105,3 +105,11 @@
 - **QUAN SÁT KHOA HỌC quan trọng (cho report + đề xuất với Loc)**: mọi data point spread = **0.00%** — Verilator fully deterministic (cùng binary + config → cycle count y hệt mọi run). Hệ quả: quy tắc "≥3 runs báo median" của CLAUDE.md/AGENTS rule 4 với Verilator chỉ là **reproducibility check** (xác nhận harness ổn định), KHÔNG đo được variance thật — variance thật chỉ xuất hiện ở FPGA (P3, có jitter tần số/DRAM refresh). → Đề xuất: Verilator có thể N_RUNS=1 (tiết kiệm 3× CI time) + giữ 1 run xác nhận; N_RUNS≥3 dành cho FPGA. CHƯA áp dụng — cần Loc quyết (đổi protocol phải ghi changes.md).
 - Fix workflow: artifact upload scope về `${TAG}-*` (trước đó kéo theo mọi dir ci-* đã commit → phình artifact).
 - docs/04: E1 tick B1/B3/B4/B5 ✅, B2 ⏳.
+
+## [2026-06-14 ~07:50] Claude Code — chốt protocol N_RUNS=1 + dispatch đợt lớn (7 jobs)
+
+- stream_bw timeout 350' (working set 6MB, 3 runs) → root cause rõ. Hỏi Loc 2 quyết định:
+  - **N_RUNS=1 cho Verilator** (deterministic, spread=0 đã chứng minh; FPGA giữ ≥3). changes.md + CLAUDE.md rule 4 + docs/03/04 + workflow default cập nhật.
+  - **stream_bw buffer 2MB→1MB** (vẫn DRAM-bound). stream_bw.c + docs/03 §3.
+- Dispatch 7 jobs n_runs=1: E1/stream_bw (param mới); E2 Baseline4 đủ 5 bench (rv64gc); 1 probe E3 Baseline8/zeroload (rv64imac — đường libgloss-imac trên CI lần đầu, dispatch lẻ để lộ lỗi sớm trước khi bắn 4 bench E3 còn lại).
+- Run IDs: stream2=27485967425, B4{zero=27485969753,stream=27485971963,cont=27485974088,load=27485976388,c2c=27485979647}, B8probe=27485982947.
