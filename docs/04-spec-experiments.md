@@ -5,8 +5,8 @@
 | # | Config | B1 | B2 | B3 | B4 | B5 | B6 |
 |---|---|---|---|---|---|---|---|
 | E1 | Baseline2CoreConfig | ✅ | ⏳ | ✅ | ✅ | ✅ | — |
-| E2 | Baseline4CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | — |
-| E3 | Baseline8CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | — |
+| E2 | Baseline4CoreConfig | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| E3 | Baseline8CoreConfig | ✅ | ⏳ | ⏳ | ⏳ | ⏳ | — |
 | E4 | NoCMesh2x2_4CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ |
 | E5 | NoCMesh3x3_8CoreConfig | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ |
 | E6 | NoCRing8CoreConfig (phụ) | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ |

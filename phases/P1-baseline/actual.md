@@ -113,3 +113,14 @@
   - **stream_bw buffer 2MB→1MB** (vẫn DRAM-bound). stream_bw.c + docs/03 §3.
 - Dispatch 7 jobs n_runs=1: E1/stream_bw (param mới); E2 Baseline4 đủ 5 bench (rv64gc); 1 probe E3 Baseline8/zeroload (rv64imac — đường libgloss-imac trên CI lần đầu, dispatch lẻ để lộ lỗi sớm trước khi bắn 4 bench E3 còn lại).
 - Run IDs: stream2=27485967425, B4{zero=27485969753,stream=27485971963,cont=27485974088,load=27485976388,c2c=27485979647}, B8probe=27485982947.
+
+## [2026-06-14 ~09:00] Claude Code — đợt 7 job PASS; parser đổi tiêu chí official; 11 data point chính thức
+
+- Cả 7 job PASS gồm **probe E3 rv64imac (Baseline8/zeroload)** → đường libgloss-imac trên CI hoạt động, an toàn dispatch nốt E3.
+- **Parser sửa tiêu chí "official"**: trước flag smoke theo n_runs<3 (vô nghĩa sau quyết định N_RUNS=1). Giờ: row có cột **`source`** = official nếu `meta.image_digest == PINNED_DIGEST`, smoke nếu không. summary flag smoke theo source. results.csv schema +1 cột (docs/03 §4). Rebuild results.csv từ raw (đổi schema) — 18 nhóm, phân loại đúng.
+- **11 data point chính thức** (full-spec, image pinned, N_RUNS=1 Verilator):
+  - E1 Baseline2 (5/5): zeroload 53.41, stream_bw 0.665 B/c (1MB), contention 1.581, loaded 56.27, c2c 109.4
+  - E2 Baseline4 (5/5): zeroload 53.42 (≈E1 — single-core không đổi, sanity ✓), stream_bw 0.665 (≈E1 ✓), contention 2.776 B/c (16MB/4core), loaded 62.18, c2c 108.7
+  - E3 Baseline8 (1/5): zeroload 57.77 (small core rv64imac, cache khác → hơi cao hơn)
+- **Tín hiệu khoa học (sơ bộ, baseline-only)**: contention aggregate 1.58→2.78 B/c (2→4 core, ×1.76 < ×2 → sublinear, E5 đúng); loaded latency 56.3→62.2 c/load tăng theo core. Đây là đường baseline crossbar mà P2 sẽ so với NoC.
+- Dispatch nốt 4 bench E3 (rv64imac).

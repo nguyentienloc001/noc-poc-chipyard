@@ -49,10 +49,10 @@ Dùng traffic injection framework có sẵn của Constellation (uniform random,
 
 ```
 results/csv/results.csv:
-date,platform,config,benchmark,n_active_cores,param,run_idx,cycles,instret,derived_metric
+date,platform,config,benchmark,n_active_cores,param,run_idx,cycles,instret,derived_metric,source
 ```
 
-`platform` ∈ {verilator, vc707}. `derived_metric` = bytes/cycle hoặc cycles/load tùy benchmark. Raw stdout giữ tại `results/raw/<date>-<config>-<bench>/run<i>.log`.
+`platform` ∈ {verilator, vc707}. `derived_metric` = bytes/cycle hoặc cycles/load tùy benchmark. `source` ∈ {official, smoke} — **official = chạy từ image đã pin** (meta image_digest khớp digest docs/00 §6); smoke = param giảm/không pin (KHÔNG dùng cho kết luận). Raw stdout giữ tại `results/raw/<date>-<config>-<bench>/run<i>.log`. `summary.csv` (sinh tự động) gộp theo nhóm, flag `smoke` nếu có row smoke, `HIGH-VARIANCE` nếu spread>5%.
 
 ## 5. Điều kiện hoàn thành
 

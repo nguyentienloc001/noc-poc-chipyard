@@ -26,8 +26,14 @@ DERIVED = {
     "core2core":        lambda p, c: c / p if p else 0,        # cycles/round-trip
 }
 
+# Official data point = run from the PINNED root-of-trust image (docs/00 §6).
+# Verilator is deterministic so N_RUNS=1 is official (changes.md 2026-06-14) —
+# "smoke" is no longer about run count but about provenance: reduced-param /
+# unpinned exploratory runs have no/UNSET image_digest.
+PINNED_DIGEST = "sha256:5744085506b9d7dedff92fa89e786083586cccec14af6461c03e62da34190c14"
+
 HEADER = ["date", "platform", "config", "benchmark", "n_active_cores",
-          "param", "run_idx", "cycles", "instret", "derived_metric"]
+          "param", "run_idx", "cycles", "instret", "derived_metric", "source"]
 SUMMARY_HEADER = ["platform", "config", "benchmark", "n_active_cores", "param",
                   "n_runs", "median_cycles", "min_cycles", "max_cycles",
                   "spread_pct", "median_derived", "flag"]
@@ -43,6 +49,7 @@ def parse_dir(raw_dir: Path):
     platform = meta.get("platform", "verilator")
     config = meta.get("config", "unknown")
     date = meta.get("date", "")[:10]
+    source = "official" if meta.get("image_digest") == PINNED_DIGEST else "smoke"
 
     rows = []
     for log in sorted(raw_dir.glob("run*.log")):
@@ -52,7 +59,7 @@ def parse_dir(raw_dir: Path):
                 m.group(1), int(m.group(2)), int(m.group(3)), int(m.group(4)), int(m.group(5)))
             derived = DERIVED.get(bench, lambda p, c: 0)(param, cycles)
             rows.append([date, platform, config, bench, str(ncores), str(param),
-                         str(run_idx), str(cycles), str(instret), f"{derived:.6g}"])
+                         str(run_idx), str(cycles), str(instret), f"{derived:.6g}", source])
     return rows
 
 
@@ -75,7 +82,7 @@ def write_summary(all_rows, out_path: Path):
             derived = [float(r[9]) for r in rs]
             spread = (max(cycles) - min(cycles)) / min(cycles) * 100 if min(cycles) else 0.0
             flags = []
-            if len(rs) < 3:
+            if any(r[10] != "official" for r in rs):  # provenance, not run count
                 flags.append("smoke")
             if spread > 5.0:
                 flags.append("HIGH-VARIANCE")
@@ -122,17 +129,18 @@ def main():
     write_summary(all_rows, summary)
     print(f"Regenerated {summary}")
 
-    # Variance + smoke warnings for THIS dir's groups (CLAUDE.md rule 4)
+    # Provenance + variance report for THIS dir (source = official/smoke per meta)
+    src = new_rows[0][10]
     by_key = {}
     for r in new_rows:
         by_key.setdefault((r[3], r[4], r[5]), []).append(int(r[7]))
     for key, cycles in by_key.items():
-        if len(cycles) < 3:
-            print(f"  {key}: only {len(cycles)} run(s) — smoke only, NOT an official data point")
+        tag = "OFFICIAL" if src == "official" else "smoke (not official — unpinned/reduced)"
+        line = f"  {key}: {len(cycles)} run(s), {tag}"
         if len(cycles) >= 2:
             spread = (max(cycles) - min(cycles)) / min(cycles)
-            flag = "  <-- VARIANCE >5%, investigate!" if spread > 0.05 else ""
-            print(f"  {key}: spread {spread:.1%}{flag}")
+            line += f", spread {spread:.1%}" + ("  <-- VARIANCE >5%, investigate!" if spread > 0.05 else "")
+        print(line)
 
 
 if __name__ == "__main__":

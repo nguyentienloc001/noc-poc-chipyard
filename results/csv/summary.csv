@@ -5,8 +5,15 @@ verilator,Baseline2CoreConfig,core2core,2,1000,3,109399,109399,109399,0.00,109.3
 verilator,Baseline2CoreConfig,core2core,2,200,1,21234,21234,21234,0.00,106.17,smoke
 verilator,Baseline2CoreConfig,loaded_latency,2,100000,3,5626687,5626687,5626687,0.00,56.2669,
 verilator,Baseline2CoreConfig,loaded_latency,2,5000,1,112919,112919,112919,0.00,22.5838,smoke
+verilator,Baseline2CoreConfig,stream_bw,1,3145728,1,4730423,4730423,4730423,0.00,0.664999,
 verilator,Baseline2CoreConfig,stream_bw,1,393216,1,338751,338751,338751,0.00,1.16078,smoke
 verilator,Baseline2CoreConfig,zeroload_latency,1,100000,3,5341373,5341373,5341373,0.00,53.4137,
 verilator,Baseline2CoreConfig,zeroload_latency,1,5000,1,95862,95862,95862,0.00,19.1724,smoke
 verilator,Baseline4CoreConfig,contention_bw,4,1048576,1,277779,277779,277779,0.00,3.77486,smoke
+verilator,Baseline4CoreConfig,contention_bw,4,16777216,1,6043529,6043529,6043529,0.00,2.77606,
+verilator,Baseline4CoreConfig,core2core,4,1000,1,108680,108680,108680,0.00,108.68,
+verilator,Baseline4CoreConfig,loaded_latency,4,100000,1,6218144,6218144,6218144,0.00,62.1814,
+verilator,Baseline4CoreConfig,stream_bw,1,3145728,1,4732415,4732415,4732415,0.00,0.664719,
+verilator,Baseline4CoreConfig,zeroload_latency,1,100000,1,5341582,5341582,5341582,0.00,53.4158,
+verilator,Baseline8CoreConfig,zeroload_latency,1,100000,1,5777154,5777154,5777154,0.00,57.7715,
 verilator,RocketConfig,zeroload_latency,1,20000,1,1052315,1052315,1052315,0.00,52.6157,smoke

@@ -1,0 +1,18 @@
+Running with RISCV=/work/riscv
+mkdir -p /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline4CoreConfig
+if [ "/project/src/benchmarks/build/stream_bw.riscv" != "none" ] && [ ! -f "/project/src/benchmarks/build/stream_bw.riscv" ]; then printf "\n\nBinary /project/src/benchmarks/build/stream_bw.riscv not found\n\n"; exit 1; fi
+(set -o pipefail &&  /work/chipyard/sims/verilator/simulator-chipyard.harness-Baseline4CoreConfig \
+	+permissive \
+	+dramsim +dramsim_ini_dir=/work/chipyard/generators/testchipip/src/main/resources/dramsim2_ini +max-cycles=200000000   +loadmem=/project/src/benchmarks/build/stream_bw.riscv  \
+	+verbose \
+	+permissive-off \
+	/project/src/benchmarks/build/stream_bw.riscv \
+	 \
+	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline4CoreConfig/stream_bw.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline4CoreConfig/stream_bw.log)
+[UART] UART0 is here (stdin/stdout).
+info:stream_copy,2097152,2457054
+info:stream_scale,2097152,3089911
+info:stream_add,3145728,4471820
+CSV:stream_bw,1,3145728,4732415,1310727
+sink:33
+- /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.Baseline4CoreConfig/gen-collateral/TestDriver.v:158: Verilog $finish

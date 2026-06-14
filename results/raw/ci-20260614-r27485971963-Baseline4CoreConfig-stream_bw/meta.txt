@@ -1,0 +1,12 @@
+date: 2026-06-14T09:43:42+07:00
+platform: verilator
+config: Baseline4CoreConfig
+binary: /project/src/benchmarks/build/stream_bw.riscv
+binary_sha256: 572e17da3a11df62d97a102a65535c2dff067657e3c07046d256997a78943004
+chipyard_commit: 69eba860a352343e4ac6b6df0f3638a79a86ec78
+project_commit: 8a4e70607497ffabcbf44d20a241335c0be03a3b
+image: locnguyen96/noc-poc-chipyard:pinned-digest
+image_digest: sha256:5744085506b9d7dedff92fa89e786083586cccec14af6461c03e62da34190c14
+n_runs: 1
+loadmem: 1
+timeout_cycles: 200000000

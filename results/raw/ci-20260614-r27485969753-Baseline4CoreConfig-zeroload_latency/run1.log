@@ -1,0 +1,15 @@
+Running with RISCV=/work/riscv
+mkdir -p /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline4CoreConfig
+if [ "/project/src/benchmarks/build/zeroload_latency.riscv" != "none" ] && [ ! -f "/project/src/benchmarks/build/zeroload_latency.riscv" ]; then printf "\n\nBinary /project/src/benchmarks/build/zeroload_latency.riscv not found\n\n"; exit 1; fi
+(set -o pipefail &&  /work/chipyard/sims/verilator/simulator-chipyard.harness-Baseline4CoreConfig \
+	+permissive \
+	+dramsim +dramsim_ini_dir=/work/chipyard/generators/testchipip/src/main/resources/dramsim2_ini +max-cycles=200000000   +loadmem=/project/src/benchmarks/build/zeroload_latency.riscv  \
+	+verbose \
+	+permissive-off \
+	/project/src/benchmarks/build/zeroload_latency.riscv \
+	 \
+	</dev/null 2> >(spike-dasm > /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline4CoreConfig/zeroload_latency.out) | tee /work/chipyard/sims/verilator/output/chipyard.harness.TestHarness.Baseline4CoreConfig/zeroload_latency.log)
+[UART] UART0 is here (stdin/stdout).
+CSV:zeroload_latency,1,100000,5341582,300005
+sink:0x80178340
+- /work/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.Baseline4CoreConfig/gen-collateral/TestDriver.v:158: Verilog $finish
