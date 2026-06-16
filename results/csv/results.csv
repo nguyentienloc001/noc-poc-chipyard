@@ -25,3 +25,5 @@ date,platform,config,benchmark,n_active_cores,param,run_idx,cycles,instret,deriv
 2026-06-11,verilator,Baseline2CoreConfig,loaded_latency,2,5000,1,112919,15005,22.5838,smoke
 2026-06-11,verilator,Baseline2CoreConfig,stream_bw,1,393216,1,338751,163853,1.16078,smoke
 2026-06-11,verilator,Baseline2CoreConfig,zeroload_latency,1,5000,1,95862,15005,19.1724,smoke
+2026-06-14,verilator,Baseline8CoreConfig,stream_bw,1,3145728,1,12325038,1310727,0.255231,official
+2026-06-14,verilator,Baseline8CoreConfig,core2core,8,1000,1,101000,0,101,official

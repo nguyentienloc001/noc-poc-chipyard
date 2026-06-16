@@ -15,5 +15,7 @@ verilator,Baseline4CoreConfig,core2core,4,1000,1,108680,108680,108680,0.00,108.6
 verilator,Baseline4CoreConfig,loaded_latency,4,100000,1,6218144,6218144,6218144,0.00,62.1814,
 verilator,Baseline4CoreConfig,stream_bw,1,3145728,1,4732415,4732415,4732415,0.00,0.664719,
 verilator,Baseline4CoreConfig,zeroload_latency,1,100000,1,5341582,5341582,5341582,0.00,53.4158,
+verilator,Baseline8CoreConfig,core2core,8,1000,1,101000,101000,101000,0.00,101,
+verilator,Baseline8CoreConfig,stream_bw,1,3145728,1,12325038,12325038,12325038,0.00,0.255231,
 verilator,Baseline8CoreConfig,zeroload_latency,1,100000,1,5777154,5777154,5777154,0.00,57.7715,
 verilator,RocketConfig,zeroload_latency,1,20000,1,1052315,1052315,1052315,0.00,52.6157,smoke

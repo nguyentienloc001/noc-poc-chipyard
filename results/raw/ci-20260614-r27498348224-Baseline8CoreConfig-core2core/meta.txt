@@ -1,0 +1,12 @@
+date: 2026-06-14T19:22:07+07:00
+platform: verilator
+config: Baseline8CoreConfig
+binary: /project/src/benchmarks/build/core2core.riscv
+binary_sha256: 650d0a8a8e545171f6d66943225f713356efcaf7a049d42339711963513ac5f7
+chipyard_commit: 69eba860a352343e4ac6b6df0f3638a79a86ec78
+project_commit: e24ca486b81ed7622096ad04282b3a095bf0e995
+image: locnguyen96/noc-poc-chipyard:pinned-digest
+image_digest: sha256:5744085506b9d7dedff92fa89e786083586cccec14af6461c03e62da34190c14
+n_runs: 1
+loadmem: 1
+timeout_cycles: 200000000
